@@ -1,3 +1,5 @@
+import 'package:cafe_reparo_mobile/widget/purple_button.dart' as purple;
+import 'package:cafe_reparo_mobile/widget/red_button.dart' as red;
 import 'package:flutter/material.dart';
 
 void main() {
@@ -43,13 +45,22 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
         title: Text(widget.title),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            purple.PurpleButton(
+              onPressed: () => {},
+              text: "text",
+              type: purple.ButtonType.outline,
+            ),
+            red.RedButton(
+              onPressed: () => {},
+              text: "text",
+              type: red.ButtonType.outline,
+            ),
             const Text(
               'Quantidade de vezes que você apertou o botão:',
             ),
