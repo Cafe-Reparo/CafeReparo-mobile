@@ -1,5 +1,7 @@
 import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:cafe_reparo_mobile/themes/custom_themes.dart';
+import 'package:cafe_reparo_mobile/widget/bg.dart';
+import 'package:cafe_reparo_mobile/widget/custom_dropdown.dart';
 import 'package:cafe_reparo_mobile/widget/purple_button.dart' as purple;
 import 'package:cafe_reparo_mobile/widget/red_button.dart' as red;
 import 'package:flutter/material.dart';
@@ -31,6 +33,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String? selectedItem;
   int _counter = 0;
 
   void _incrementCounter() {
@@ -46,70 +49,76 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'titulo',
-              style: Theme.of(context).primaryTextTheme.titleLarge?.copyWith(
-                    color: MyColors.primary500,
+      body: Bg(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              //crie espaçamento entre os widgets
+              const SizedBox(height: 20),
+              Text(
+                'titulo',
+                style: Theme.of(context).primaryTextTheme.titleLarge?.copyWith(
+                      color: MyColors.primary500,
+                    ),
+              ),
+              const SizedBox(height: 20),
+              CustomDropdown(
+                value: selectedItem,
+                items: const [
+                  DropdownMenuItem(
+                    value: 'Item 1',
+                    child: Text('Item 1'),
                   ),
-            ),
-            DropdownButtonFormField<String>(
-              iconEnabledColor: MyColors.primary400,
-              decoration: const InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                ),
-                prefixIcon: Icon(Icons.person, color: MyColors.primary400),
+                  DropdownMenuItem(
+                    value: 'Item 2',
+                    child: Text('Item 2'),
+                  ),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    selectedItem = value;
+                  });
+                },
               ),
-              items: const [
-                DropdownMenuItem(
-                  value: 'Item 1',
-                  child: Text('Item 1'),
-                ),
-                DropdownMenuItem(
-                  value: 'Item 2',
-                  child: Text('Item 2'),
-                ),
-              ],
-              onChanged: (value) {},
-              hint: const Text(
-                'Selecione um item',
-                style: TextStyle(color: MyColors.primary400),
-              ),
-            ),
-            const SizedBox(
-              width: 400,
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Digite algo',
+              const SizedBox(height: 20),
+              const SizedBox(
+                width: 400,
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Digite algo',
+                  ),
                 ),
               ),
-            ),
-            IconButton(onPressed: () => {}, icon: const Icon(Icons.add)),
-            purple.PurpleButton(
-                onPressed: () => {},
-                text: "Continuar",
-                type: purple.ButtonType.fill),
-            purple.PurpleButton(
+              const SizedBox(height: 20),
+              IconButton(onPressed: () => {}, icon: const Icon(Icons.add)),
+              const SizedBox(height: 20),
+              purple.PurpleButton(
+                  onPressed: () => {},
+                  text: "Continuar",
+                  type: purple.ButtonType.fill),
+              const SizedBox(height: 20),
+              purple.PurpleButton(
+                  onPressed: () => {},
+                  text: "text",
+                  type: purple.ButtonType.outline),
+              const SizedBox(height: 20),
+              red.RedButton(
                 onPressed: () => {},
                 text: "text",
-                type: purple.ButtonType.outline),
-            red.RedButton(
-              onPressed: () => {},
-              text: "text",
-              type: red.ButtonType.outline,
-            ),
-            const Text(
-              'Quantidade de vezes que você apertou o botão:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+                type: red.ButtonType.outline,
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Quantidade de vezes que você apertou o botão:',
+              ),
+              const SizedBox(height: 20),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
