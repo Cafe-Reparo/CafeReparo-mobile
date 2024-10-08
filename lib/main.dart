@@ -1,3 +1,5 @@
+import 'package:cafe_reparo_mobile/themes/colors.dart';
+import 'package:cafe_reparo_mobile/themes/custom_themes.dart';
 import 'package:cafe_reparo_mobile/widget/purple_button.dart' as purple;
 import 'package:cafe_reparo_mobile/widget/red_button.dart' as red;
 import 'package:flutter/material.dart';
@@ -13,10 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Café Reparo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: CustomThemes().defaultTheme,
       home: const MyHomePage(title: 'Café Reparo'),
     );
   }
@@ -51,11 +50,53 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            purple.PurpleButton(
-              onPressed: () => {},
-              text: "text",
-              type: purple.ButtonType.outline,
+            Text(
+              'titulo',
+              style: Theme.of(context).primaryTextTheme.titleLarge?.copyWith(
+                    color: MyColors.primary500,
+                  ),
             ),
+            DropdownButtonFormField<String>(
+              iconEnabledColor: MyColors.primary400,
+              decoration: const InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.transparent),
+                ),
+                prefixIcon: Icon(Icons.person, color: MyColors.primary400),
+              ),
+              items: const [
+                DropdownMenuItem(
+                  value: 'Item 1',
+                  child: Text('Item 1'),
+                ),
+                DropdownMenuItem(
+                  value: 'Item 2',
+                  child: Text('Item 2'),
+                ),
+              ],
+              onChanged: (value) {},
+              hint: const Text(
+                'Selecione um item',
+                style: TextStyle(color: MyColors.primary400),
+              ),
+            ),
+            const SizedBox(
+              width: 400,
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Digite algo',
+                ),
+              ),
+            ),
+            IconButton(onPressed: () => {}, icon: const Icon(Icons.add)),
+            purple.PurpleButton(
+                onPressed: () => {},
+                text: "Continuar",
+                type: purple.ButtonType.fill),
+            purple.PurpleButton(
+                onPressed: () => {},
+                text: "text",
+                type: purple.ButtonType.outline),
             red.RedButton(
               onPressed: () => {},
               text: "text",
@@ -73,7 +114,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );

@@ -79,7 +79,7 @@ class RedButton extends StatelessWidget {
     return Container(
       decoration: _getBoxDecoration(),
       child: MaterialButton(
-        height: 42,
+        height: 52,
         highlightColor: _getStatusColor(),
         focusColor: _getStatusColor(),
         splashColor: _getStatusColor(),
@@ -88,7 +88,6 @@ class RedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         onPressed: onPressed,
-        textColor: _getForegroundColor(),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -96,7 +95,12 @@ class RedButton extends StatelessWidget {
               Icon(icon),
               const SizedBox(width: 4),
             ],
-            Text(text),
+            Text(
+              text,
+              style: Theme.of(context).primaryTextTheme.labelSmall?.copyWith(
+                    color: _getForegroundColor(),
+                  ),
+            ),
           ],
         ),
       ),

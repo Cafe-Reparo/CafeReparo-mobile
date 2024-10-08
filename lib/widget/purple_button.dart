@@ -22,6 +22,7 @@ class PurpleButton extends StatelessWidget {
     switch (type) {
       case ButtonType.fill:
         return BoxDecoration(
+          border: Border.all(color: MyColors.primary550, width: 1),
           color: MyColors.primary550,
           borderRadius: BorderRadius.circular(8),
         );
@@ -65,11 +66,11 @@ class PurpleButton extends StatelessWidget {
   Color _getStatusColor() {
     switch (type) {
       case ButtonType.fill:
-        return MyColors.white100.withOpacity(0.2);
+        return MyColors.white100.withOpacity(0.1);
       case ButtonType.outline:
-        return MyColors.primary550.withOpacity(0.2);
+        return MyColors.primary550.withOpacity(0.1);
       case ButtonType.ghost:
-        return MyColors.primary550.withOpacity(0.2);
+        return MyColors.primary550.withOpacity(0.1);
     }
   }
 
@@ -78,7 +79,7 @@ class PurpleButton extends StatelessWidget {
     return Container(
       decoration: _getBoxDecoration(),
       child: MaterialButton(
-        height: 42,
+        height: 52,
         highlightColor: _getStatusColor(),
         focusColor: _getStatusColor(),
         splashColor: _getStatusColor(),
@@ -87,7 +88,6 @@ class PurpleButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         onPressed: onPressed,
-        textColor: _getForegroundColor(),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -95,7 +95,12 @@ class PurpleButton extends StatelessWidget {
               Icon(icon),
               const SizedBox(width: 4),
             ],
-            Text(text),
+            Text(
+              text,
+              style: Theme.of(context).primaryTextTheme.labelSmall?.copyWith(
+                    color: _getForegroundColor(),
+                  ),
+            ),
           ],
         ),
       ),
