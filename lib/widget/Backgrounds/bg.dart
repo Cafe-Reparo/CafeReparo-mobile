@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 
 class Bg extends StatelessWidget {
   final Widget child;
-  final EdgeInsets? padding;
 
   const Bg({
     required this.child,
-    this.padding,
     super.key,
   });
 

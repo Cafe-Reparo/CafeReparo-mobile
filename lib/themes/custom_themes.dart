@@ -8,6 +8,7 @@ class CustomThemes {
   );
 
   final defaultTheme = ThemeData(
+    fontFamily: 'Montserrat',
     primaryColor: MyColors.primary550,
     primaryTextTheme: const TextTheme(
       headlineLarge: TextStyle(
@@ -36,7 +37,7 @@ class CustomThemes {
       ),
       bodyLarge: TextStyle(
         fontSize: 20,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w400,
       ),
       bodyMedium: TextStyle(
         fontSize: 16,
@@ -58,6 +59,8 @@ class CustomThemes {
       ),
     ),
     //
+
+    //
     colorScheme: const ColorScheme(
       primary: MyColors.primary550,
       secondary: MyColors.secondary200,
@@ -68,6 +71,50 @@ class CustomThemes {
       onSurface: MyColors.primary550,
       onError: MyColors.primary100,
       brightness: Brightness.dark,
+    ),
+    //
+    datePickerTheme: const DatePickerThemeData(
+      elevation: 0,
+      locale: Locale('pt', 'PT'),
+      headerHeadlineStyle: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w500,
+        color: MyColors.primary550,
+      ),
+      headerBackgroundColor: MyColors.primary100,
+      weekdayStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: MyColors.primary400,
+      ),
+      dayStyle: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: MyColors.primary400,
+      ),
+      dividerColor: MyColors.primary300,
+      cancelButtonStyle: ButtonStyle(
+        textStyle: WidgetStatePropertyAll(
+          TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: MyColors.primary550,
+            fontFamily: 'Montserrat',
+          ),
+        ),
+        foregroundColor: WidgetStatePropertyAll(MyColors.red200),
+      ),
+      confirmButtonStyle: ButtonStyle(
+        textStyle: WidgetStatePropertyAll(
+          TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: MyColors.primary550,
+            fontFamily: 'Montserrat',
+          ),
+        ),
+        foregroundColor: WidgetStatePropertyAll(MyColors.primary550),
+      ),
     ),
     //
     floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -81,7 +128,7 @@ class CustomThemes {
     //
     iconButtonTheme: const IconButtonThemeData(
       style: ButtonStyle(
-        iconSize: WidgetStatePropertyAll(30),
+        iconSize: WidgetStatePropertyAll(28),
       ),
     ),
     //
@@ -91,6 +138,8 @@ class CustomThemes {
       prefixIconColor: MyColors.primary400,
       labelStyle: const TextStyle(
         color: MyColors.primary400,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
       ),
       suffixIconColor: MyColors.primary400,
       border: OutlineInputBorder(
@@ -106,5 +155,25 @@ class CustomThemes {
         borderSide: const BorderSide(color: Colors.transparent),
       ),
     ),
+    //
+    chipTheme: ChipThemeData(
+      backgroundColor: MyColors.primary300,
+      labelPadding: const EdgeInsets.symmetric(horizontal: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      side: const BorderSide(
+        color: Colors.transparent,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      labelStyle: const TextStyle(
+        color: MyColors.secondary200,
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'Montserrat',
+      ),
+    ),
+    //
+    scaffoldBackgroundColor: MyColors.white0,
   );
 }

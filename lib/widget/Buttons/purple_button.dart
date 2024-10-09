@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 
 enum ButtonType { fill, outline, ghost }
 
+enum ButtonSize { sm, md, lg } // Enum para tamanhos de botão
+
 class PurpleButton extends StatelessWidget {
   final ButtonType type;
+  final ButtonSize size; // Propriedade para o tamanho do botão
   final IconData? icon;
   final VoidCallback onPressed;
   final String text;
 
   const PurpleButton({
     this.type = ButtonType.fill,
+    this.size = ButtonSize.md, // Valor padrão para o tamanho
     this.icon,
     required this.onPressed,
     required this.text,
@@ -74,12 +78,36 @@ class PurpleButton extends StatelessWidget {
     }
   }
 
+  // Define a altura do botão com base no tamanho
+  double _getButtonHeight() {
+    switch (size) {
+      case ButtonSize.sm:
+        return 40; // Altura para botão pequeno
+      case ButtonSize.md:
+        return 56; // Altura para botão médio (padrão)
+      case ButtonSize.lg:
+        return 66; // Altura para botão grande
+    }
+  }
+
+  // Define o tamanho do ícone com base no tamanho do botão
+  double _getIconSize() {
+    switch (size) {
+      case ButtonSize.sm:
+        return 18;
+      case ButtonSize.md:
+        return 22;
+      case ButtonSize.lg:
+        return 26;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: _getBoxDecoration(),
       child: MaterialButton(
-        height: 52,
+        height: _getButtonHeight(), // Usa a altura definida
         highlightColor: _getStatusColor(),
         focusColor: _getStatusColor(),
         splashColor: _getStatusColor(),
@@ -88,22 +116,41 @@ class PurpleButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         onPressed: onPressed,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (icon != null) ...[
-              Icon(icon),
-              const SizedBox(width: 4),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (icon != null) ...[
+                Icon(
+                  icon,
+                  size: _getIconSize(), // Usa o tamanho do ícone definido
+                ),
+                const SizedBox(width: 8),
+              ],
+              Text(
+                text,
+                style: Theme.of(context).primaryTextTheme.labelSmall?.copyWith(
+                      color: _getForegroundColor(),
+                      fontSize: _getFontSize(),
+                    ),
+              ),
             ],
-            Text(
-              text,
-              style: Theme.of(context).primaryTextTheme.labelSmall?.copyWith(
-                    color: _getForegroundColor(),
-                  ),
-            ),
-          ],
+          ),
         ),
       ),
     );
+  }
+
+  // Define o tamanho da fonte do botão com base no tamanho
+  double _getFontSize() {
+    switch (size) {
+      case ButtonSize.sm:
+        return 14;
+      case ButtonSize.md:
+        return 16;
+      case ButtonSize.lg:
+        return 18;
+    }
   }
 }

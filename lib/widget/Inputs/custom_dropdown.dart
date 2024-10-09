@@ -9,13 +9,13 @@ class CustomDropdown extends StatelessWidget {
   final IconData prefixIcon;
 
   const CustomDropdown({
-    Key? key,
+    super.key,
     required this.value,
     required this.items,
     required this.onChanged,
     this.hintText = 'Selecione um item',
     this.prefixIcon = Icons.person,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

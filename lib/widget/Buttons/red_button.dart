@@ -79,7 +79,7 @@ class RedButton extends StatelessWidget {
     return Container(
       decoration: _getBoxDecoration(),
       child: MaterialButton(
-        height: 52,
+        height: 56,
         highlightColor: _getStatusColor(),
         focusColor: _getStatusColor(),
         splashColor: _getStatusColor(),
