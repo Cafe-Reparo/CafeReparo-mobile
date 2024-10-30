@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 enum ButtonType { fill, outline, ghost }
 
 enum ButtonSize { sm, md, lg } // Enum para tamanhos de botão
-
-class PurpleButton extends StatelessWidget {
+//
+class GreenButton extends StatelessWidget {
   final ButtonType type;
   final ButtonSize size; // Propriedade para o tamanho do botão
   final IconData? icon;
   final VoidCallback onPressed;
   final String text;
 
-  const PurpleButton({
+  const GreenButton({
     this.type = ButtonType.fill,
     this.size = ButtonSize.md, // Valor padrão para o tamanho
     this.icon,

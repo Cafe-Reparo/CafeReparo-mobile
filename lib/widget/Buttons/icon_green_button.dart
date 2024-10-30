@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 enum ButtonType { fill, outline, ghost }
 
-class IconPurpleButton extends StatelessWidget {
+class IconGreenButton extends StatelessWidget {
   final ButtonType type;
   final IconData icon;
   final VoidCallback onPressed;
 
-  const IconPurpleButton({
+  const IconGreenButton({
     this.type = ButtonType.fill,
     required this.icon,
     required this.onPressed,

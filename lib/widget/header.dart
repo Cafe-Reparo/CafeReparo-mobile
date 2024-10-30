@@ -1,6 +1,6 @@
 import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:cafe_reparo_mobile/widget/Buttons/custom_circle_avatar.dart';
-import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart';
+import 'package:cafe_reparo_mobile/widget/Buttons/green_button.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -47,7 +47,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
             Row(
               children: [
                 if (showRepairButton) ...[
-                  PurpleButton(
+                  GreenButton(
                     size: ButtonSize.sm,
                     onPressed: () => {},
                     text: "Reparos",
