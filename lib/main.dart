@@ -6,6 +6,11 @@ import 'package:cafe_reparo_mobile/widget/Cards/custom_big_card.dart';
 import 'package:cafe_reparo_mobile/widget/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:cafe_reparo_mobile/pages/signup_page.dart';
+import 'package:cafe_reparo_mobile/pages/signin_page.dart';
+import 'package:cafe_reparo_mobile/pages/forgot_password_page.dart';
+import 'package:cafe_reparo_mobile/pages/edit_account_page.dart';
+import 'package:cafe_reparo_mobile/pages/change_password_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +29,11 @@ class MyApp extends StatelessWidget {
               title: "Repair Café",
             ),
         '/design': (context) => const Design(),
+        '/signup': (context) => const SignupScreen(),
+        '/signin': (context) => const SigninScreen(),
+        '/forgotpassword': (context) => const ForgotPasswordScreen(),
+        '/editaccount': (context) => const EditAccountScreen(),
+        '/changepassword': (context) => const ChangePasswordScreen(),
       },
       theme: CustomThemes().defaultTheme,
       localizationsDelegates: const [
@@ -67,9 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     purple.PurpleButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/design');
+                          Navigator.pushNamed(context, '/signup');
                         },
-                        text: "ir para o design system")
+                        text: "ir para o design system"),
                   ],
                 ),
               ),

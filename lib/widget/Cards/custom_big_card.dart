@@ -16,7 +16,7 @@ class CustomBigCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24.0),
       width: double.infinity,
-      height: height,
+      height: MediaQuery.of(context).size.height * 0.80,
       decoration: BoxDecoration(
         color: MyColors.white0,
         borderRadius: const BorderRadius.only(

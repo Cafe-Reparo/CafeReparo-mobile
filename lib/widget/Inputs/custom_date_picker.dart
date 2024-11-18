@@ -9,7 +9,7 @@ class CustomDatePicker extends StatefulWidget {
 
   const CustomDatePicker({
     super.key,
-    this.buttonText = 'Selecionar Data', // Texto padrão
+    this.buttonText = 'Selecionar Data de Nascimento', // Texto padrão
     this.icon = PhosphorIcons.calendar, // Ícone opcional
   });
 

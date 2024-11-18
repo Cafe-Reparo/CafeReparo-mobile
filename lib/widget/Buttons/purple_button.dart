@@ -9,6 +9,7 @@ class PurpleButton extends StatelessWidget {
   final ButtonType type;
   final ButtonSize size; // Propriedade para o tamanho do botão
   final IconData? icon;
+  final Icon? prefixIcon; // Propriedade para o prefixIcon
   final VoidCallback onPressed;
   final String text;
 
@@ -17,8 +18,8 @@ class PurpleButton extends StatelessWidget {
     this.size = ButtonSize.md, // Valor padrão para o tamanho
     this.icon,
     required this.onPressed,
-    required this.text,
-    super.key,
+    required this.text,  
+    this.prefixIcon, // Adiciona prefixIcon aqui
   });
 
   // Define o estilo do botão (fill, outline, ghost)
@@ -102,6 +103,17 @@ class PurpleButton extends StatelessWidget {
     }
   }
 
+  // Função que retorna a cor mais escura para o ícone
+  Color _getIconColor() {
+    switch (type) {
+      case ButtonType.fill:
+        return MyColors.primary300; // Cor mais escura do botão
+      case ButtonType.outline:
+      case ButtonType.ghost:
+        return MyColors.primary400; // Um tom escuro para outline e ghost
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -121,10 +133,19 @@ class PurpleButton extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+              if (prefixIcon != null) ...[ // Verifica se prefixIcon está presente
+                Icon(
+                  prefixIcon!.icon,
+                  size: _getIconSize(), // Usa o tamanho do ícone definido
+                  color: _getIconColor(), // Aplica a cor mais escura
+                ),
+                const SizedBox(width: 8), // Espaçamento entre o prefixIcon e o texto
+              ],
               if (icon != null) ...[
                 Icon(
                   icon,
                   size: _getIconSize(), // Usa o tamanho do ícone definido
+                  color: _getIconColor(), // Aplica a cor mais escura
                 ),
                 const SizedBox(width: 8),
               ],
