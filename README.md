@@ -1,2 +1,2 @@
-# CafeReparo-mobile
-Repositório mobile para o projeto Café Reparo
+# Café Reparo | Mobile
+Repositório para a aplicação do projeto Café Reparo.
