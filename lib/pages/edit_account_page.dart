@@ -21,7 +21,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const HeaderWithLogo(),
+      appBar: const Header(),
       body: Bg(
         child: Column(
           children: [

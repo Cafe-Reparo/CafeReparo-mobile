@@ -19,7 +19,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const HeaderWithLogo(),
+      appBar: const Header(),
       body: Bg(
         child: Column(
           children: [

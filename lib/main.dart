@@ -11,6 +11,10 @@ import 'package:cafe_reparo_mobile/pages/signin_page.dart';
 import 'package:cafe_reparo_mobile/pages/forgot_password_page.dart';
 import 'package:cafe_reparo_mobile/pages/edit_account_page.dart';
 import 'package:cafe_reparo_mobile/pages/change_password_page.dart';
+import 'package:cafe_reparo_mobile/pages/create_service_page.dart';
+import 'package:cafe_reparo_mobile/pages/contacts_page.dart';
+import 'package:cafe_reparo_mobile/pages/adress_page.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +38,10 @@ class MyApp extends StatelessWidget {
         '/forgotpassword': (context) => const ForgotPasswordScreen(),
         '/editaccount': (context) => const EditAccountScreen(),
         '/changepassword': (context) => const ChangePasswordScreen(),
+        '/createservice': (context) => const CreateServiceScreen(),
+        '/contacts': (context) => const ContactsScreen(),
+        '/adress': (context) => const AdressScreen(),
+
       },
       theme: CustomThemes().defaultTheme,
       localizationsDelegates: const [
