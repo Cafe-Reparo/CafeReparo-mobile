@@ -22,8 +22,12 @@ class Design extends StatefulWidget {
   State<Design> createState() => _DesignState();
 }
 
+bool dateError = false;
+
 class _DesignState extends State<Design> {
   String? selectedItem;
+  DateTime? selectedDate;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,11 +69,27 @@ class _DesignState extends State<Design> {
                     const SizedBox(
                       height: 20,
                     ),
-                    const CustomDatePicker(),
+                    SizedBox(
+                      width: 400,
+                      child: CustomDatePicker(
+                        // Seletor de data para data de lançamento
+                        initialDate: selectedDate,
+                        errorText: "Release date is required",
+                        buttonText: "Select a release date",
+                        onDateSelected: (date) {
+                          setState(() {
+                            selectedDate = date;
+                            dateError = date == null;
+                          });
+                        },
+                        hasError: dateError,
+                      ),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
-                    const PasswordField(
+                    PasswordField(
+                      controller: TextEditingController(),
                       label: 'Senha',
                     ),
                     const SizedBox(

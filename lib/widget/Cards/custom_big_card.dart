@@ -8,7 +8,7 @@ class CustomBigCard extends StatelessWidget {
   const CustomBigCard({
     super.key,
     required this.child,
-    this.height,
+    this.height = 800,
   });
 
   @override
@@ -16,7 +16,7 @@ class CustomBigCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24.0),
       width: double.infinity,
-      height: MediaQuery.of(context).size.height,
+      height: height,
       decoration: BoxDecoration(
         color: MyColors.white0,
         borderRadius: const BorderRadius.only(

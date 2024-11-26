@@ -8,6 +8,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../themes/colors.dart';
 import '../widget/Inputs/custom_date_picker.dart';
 
+bool dateError = false;
 
 class EditAccountScreen extends StatefulWidget {
   const EditAccountScreen({super.key, String? selectedItem});
@@ -17,7 +18,8 @@ class EditAccountScreen extends StatefulWidget {
 }
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
-    String? selectedItem;
+  DateTime? selectedDate;
+  String? selectedItem;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +59,22 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    const CustomDatePicker(),
+                    SizedBox(
+                      width: 400,
+                      child: CustomDatePicker(
+                        // Seletor de data para data de lançamento
+                        initialDate: selectedDate,
+                        errorText: "Release date is required",
+                        buttonText: "Select a release date",
+                        onDateSelected: (date) {
+                          setState(() {
+                            selectedDate = date;
+                            dateError = date == null;
+                          });
+                        },
+                        hasError: dateError,
+                      ),
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
@@ -77,9 +94,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                       width: 400,
                       height: 35,
                       child: purple.PurpleButton(
-                        onPressed: () => {
-                          Navigator.pushNamed(context, '/changepassword')
-                        },
+                        onPressed: () =>
+                            {Navigator.pushNamed(context, '/changepassword')},
                         text: "Alterar senha",
                         icon: PhosphorIcons.lock,
                         type: purple.ButtonType.outline,
@@ -92,11 +108,11 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                       width: 400,
                       height: 35,
                       child: purple.PurpleButton(
-                        onPressed: () => {},
-                        text: "Salvar",
-                        type: purple.ButtonType.fill),
+                          onPressed: () => {},
+                          text: "Salvar",
+                          type: purple.ButtonType.fill),
                     ),
-                      const SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                   ],

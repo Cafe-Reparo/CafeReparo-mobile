@@ -1,16 +1,24 @@
 import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart'; // Importa o pacote intl
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class CustomDatePicker extends StatefulWidget {
-  final String buttonText; // Propriedade para texto do botão
-  final IconData? icon; // Propriedade para ícone opcional
+  final String buttonText;
+  final IconData? icon;
+  final Function(DateTime?) onDateSelected;
+  final bool hasError;
+  final String errorText;
+  final DateTime? initialDate;
 
   const CustomDatePicker({
     super.key,
-    this.buttonText = 'Selecionar Data de Nascimento', // Texto padrão
-    this.icon = PhosphorIcons.calendar, // Ícone opcional
+    this.buttonText = 'Selecionar Data',
+    this.icon = PhosphorIcons.calendar,
+    required this.onDateSelected,
+    this.hasError = false,
+    this.errorText = 'Date is required',
+    this.initialDate,
   });
 
   @override
@@ -20,6 +28,13 @@ class CustomDatePicker extends StatefulWidget {
 class _CustomDatePickerState extends State<CustomDatePicker> {
   DateTime? selectedDate;
 
+  @override
+  void initState() {
+    super.initState();
+    selectedDate =
+        widget.initialDate; // Initialize selectedDate with initialDate
+  }
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -27,26 +42,35 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime(2101),
-      currentDate: selectedDate,
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
-        selectedDate = picked; // Atualiza a data selecionada
+        selectedDate = picked;
       });
+      widget.onDateSelected(selectedDate);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // Define text color based on the selection state
+    Color textColor = selectedDate != null
+        ? MyColors.primary550 // Color when date is selected
+        : MyColors.primary400; // Default color
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         MaterialButton(
           elevation: 0,
           height: 56,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
+            side: BorderSide(
+              color: widget.hasError ? MyColors.red200 : Colors.transparent,
+            ),
           ),
-          color: MyColors.primary300,
+          color: MyColors.primary200,
           onPressed: () => _selectDate(context),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -62,18 +86,34 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                 ],
                 Text(
                   selectedDate != null
-                      ? DateFormat('dd/MM/yyyy')
-                          .format(selectedDate!) // Exibe a data formatada
+                      ? DateFormat('dd/MM/yyyy').format(selectedDate!)
                       : widget.buttonText,
                   style:
                       Theme.of(context).primaryTextTheme.bodyMedium?.copyWith(
-                            color: MyColors.primary400,
+                            color: textColor,
                           ),
                 ),
               ],
             ),
           ),
         ),
+        // Error message
+        if (widget.hasError) ...[
+          const SizedBox(height: 4),
+          Row(
+            children: [
+              const SizedBox(width: 14),
+              Text(
+                widget.errorText,
+                style: const TextStyle(
+                  color: MyColors.red50,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ],
       ],
     );
   }

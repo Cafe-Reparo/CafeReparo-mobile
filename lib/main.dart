@@ -1,4 +1,12 @@
+import 'package:cafe_reparo_mobile/pages/adress_page.dart';
+import 'package:cafe_reparo_mobile/pages/change_password_page.dart';
+import 'package:cafe_reparo_mobile/pages/contacts_page.dart';
+import 'package:cafe_reparo_mobile/pages/create_service_page.dart';
 import 'package:cafe_reparo_mobile/pages/design.dart';
+import 'package:cafe_reparo_mobile/pages/edit_account_page.dart';
+import 'package:cafe_reparo_mobile/pages/forgot_password_page.dart';
+import 'package:cafe_reparo_mobile/pages/signin_page.dart';
+import 'package:cafe_reparo_mobile/pages/signup_page.dart';
 import 'package:cafe_reparo_mobile/themes/custom_themes.dart';
 import 'package:cafe_reparo_mobile/widget/Backgrounds/bg.dart';
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
@@ -6,15 +14,6 @@ import 'package:cafe_reparo_mobile/widget/Cards/custom_big_card.dart';
 import 'package:cafe_reparo_mobile/widget/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:cafe_reparo_mobile/pages/signup_page.dart';
-import 'package:cafe_reparo_mobile/pages/signin_page.dart';
-import 'package:cafe_reparo_mobile/pages/forgot_password_page.dart';
-import 'package:cafe_reparo_mobile/pages/edit_account_page.dart';
-import 'package:cafe_reparo_mobile/pages/change_password_page.dart';
-import 'package:cafe_reparo_mobile/pages/create_service_page.dart';
-import 'package:cafe_reparo_mobile/pages/contacts_page.dart';
-import 'package:cafe_reparo_mobile/pages/adress_page.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -41,7 +40,6 @@ class MyApp extends StatelessWidget {
         '/createservice': (context) => const CreateServiceScreen(),
         '/contacts': (context) => const ContactsScreen(),
         '/adress': (context) => const AdressScreen(),
-
       },
       theme: CustomThemes().defaultTheme,
       localizationsDelegates: const [
@@ -87,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () {
                           Navigator.pushNamed(context, '/signup');
                         },
-                        text: "ir para o design system"),
+                        text: "sign-up"),
                   ],
                 ),
               ),

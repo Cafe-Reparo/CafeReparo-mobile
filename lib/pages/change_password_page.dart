@@ -43,7 +43,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     const SizedBox(
                       height: 40,
                     ),
-                    const PasswordField(
+                    PasswordField(
+                      controller: TextEditingController(),
                       label: 'Senha',
                     ),
                     const SizedBox(
@@ -59,11 +60,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       width: 400,
                       height: 35,
                       child: purple.PurpleButton(
-                        onPressed: () => {},
-                        text: "Confirmar",
-                        type: purple.ButtonType.fill),
+                          onPressed: () => {},
+                          text: "Confirmar",
+                          type: purple.ButtonType.fill),
                     ),
-                      const SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                   ],

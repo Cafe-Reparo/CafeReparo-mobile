@@ -16,7 +16,8 @@ class PasswordField extends StatefulWidget {
 
   const PasswordField({
     super.key,
-    this.label = 'Senha', // Rótulo padrão
+    this.label = 'Senha',
+    required TextEditingController controller, // Rótulo padrão
   });
 
   @override
@@ -62,7 +63,8 @@ class PasswordConfirmationField extends StatefulWidget {
   });
 
   @override
-  _PasswordConfirmationFieldState createState() => _PasswordConfirmationFieldState();
+  _PasswordConfirmationFieldState createState() =>
+      _PasswordConfirmationFieldState();
 }
 
 class _PasswordConfirmationFieldState extends State<PasswordConfirmationField> {

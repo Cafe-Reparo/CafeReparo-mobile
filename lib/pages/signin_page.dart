@@ -56,14 +56,16 @@ class _SigninScreenState extends State<SigninScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const PasswordField(
+                    PasswordField(
+                      controller: TextEditingController(),
                       label: 'Senha',
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Align(
-                      alignment: Alignment.centerLeft, // Alinha o texto à esquerda
+                      alignment:
+                          Alignment.centerLeft, // Alinha o texto à esquerda
                       child: InkWell(
                         onTap: () {
                           Navigator.pushNamed(context, '/forgotpassword');
@@ -84,11 +86,11 @@ class _SigninScreenState extends State<SigninScreen> {
                       width: 400,
                       height: 35,
                       child: purple.PurpleButton(
-                        onPressed: () => {},
-                        text: "Entrar",
-                        type: purple.ButtonType.fill),
+                          onPressed: () => {},
+                          text: "Entrar",
+                          type: purple.ButtonType.fill),
                     ),
-                      const SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
