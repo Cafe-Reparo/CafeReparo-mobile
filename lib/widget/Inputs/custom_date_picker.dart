@@ -1,13 +1,13 @@
-import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+
+import '../../themes/colors.dart';
 
 class CustomDatePicker extends StatefulWidget {
   final String buttonText;
   final IconData? icon;
   final Function(DateTime?) onDateSelected;
-  final bool hasError;
   final String errorText;
   final DateTime? initialDate;
 
@@ -16,7 +16,6 @@ class CustomDatePicker extends StatefulWidget {
     this.buttonText = 'Selecionar Data',
     this.icon = PhosphorIcons.calendar,
     required this.onDateSelected,
-    this.hasError = false,
     this.errorText = 'Date is required',
     this.initialDate,
   });
@@ -58,6 +57,11 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
         ? MyColors.primary550 // Color when date is selected
         : MyColors.primary400; // Default color
 
+    // Define fontWeight based on whether a date is selected
+    FontWeight fontWeight = selectedDate != null
+        ? FontWeight.w600 // Bold when date is selected
+        : FontWeight.w500; // Normal when no date is selected
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -67,10 +71,12 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
             side: BorderSide(
-              color: widget.hasError ? MyColors.red200 : Colors.transparent,
+              color: widget.errorText.isNotEmpty
+                  ? MyColors.red200
+                  : Colors.transparent,
             ),
           ),
-          color: MyColors.primary200,
+          color: MyColors.primary300,
           onPressed: () => _selectDate(context),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -91,6 +97,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                   style:
                       Theme.of(context).primaryTextTheme.bodyMedium?.copyWith(
                             color: textColor,
+                            fontWeight: fontWeight, // Apply dynamic fontWeight
                           ),
                 ),
               ],
@@ -98,18 +105,16 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           ),
         ),
         // Error message
-        if (widget.hasError) ...[
+        if (widget.errorText.isNotEmpty) ...[
           const SizedBox(height: 4),
           Row(
             children: [
-              const SizedBox(width: 14),
+              const SizedBox(width: 10),
               Text(
                 widget.errorText,
-                style: const TextStyle(
-                  color: MyColors.red50,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: Theme.of(context).primaryTextTheme.labelMedium?.copyWith(
+                      color: MyColors.red50,
+                    ),
               ),
             ],
           ),

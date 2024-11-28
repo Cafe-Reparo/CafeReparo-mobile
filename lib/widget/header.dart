@@ -55,55 +55,11 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   const SizedBox(width: 12),
                 ],
-                if (showAvatar) const CustomCircleAvatar(),
+                if (showAvatar)
+                  CustomCircleAvatar(
+                      onTap: () => {Navigator.pushNamed(context, '/sign-up')}),
               ],
             )
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(80);
-}
-
-class HeaderWithLogo extends StatelessWidget implements PreferredSizeWidget {
-  
-  const HeaderWithLogo({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(80),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: const Border(
-            bottom: BorderSide(
-              color: MyColors.white0,
-            ),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF1C2BCC).withOpacity(0.12),
-              offset: const Offset(0, 0),
-              blurRadius: 32,
-              spreadRadius: 0,
-            ),
-          ],
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Icon(
-              PhosphorIcons.coffee,
-              size: 28,
-              color: MyColors.primary550,
-            ),
           ],
         ),
       ),

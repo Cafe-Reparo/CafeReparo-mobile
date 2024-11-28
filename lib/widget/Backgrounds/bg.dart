@@ -1,11 +1,15 @@
-import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../themes/colors.dart';
+import '../Cards/custom_big_card.dart';
 
 class Bg extends StatelessWidget {
   final Widget child;
+  final double padding;
 
   const Bg({
     required this.child,
+    this.padding = 24,
     super.key,
   });
 
@@ -13,7 +17,7 @@ class Bg extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height - 45,
       child: Stack(
         children: [
           Container(
@@ -38,7 +42,14 @@ class Bg extends StatelessWidget {
             ),
           ),
           SingleChildScrollView(
-            child: child,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height - 45,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [CustomBigCard(padding: padding, child: child)],
+              ),
+            ),
           ),
         ],
       ),

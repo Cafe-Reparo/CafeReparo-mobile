@@ -2,16 +2,13 @@ import 'package:cafe_reparo_mobile/pages/adress_page.dart';
 import 'package:cafe_reparo_mobile/pages/change_password_page.dart';
 import 'package:cafe_reparo_mobile/pages/contacts_page.dart';
 import 'package:cafe_reparo_mobile/pages/create_service_page.dart';
-import 'package:cafe_reparo_mobile/pages/design.dart';
+import 'package:cafe_reparo_mobile/pages/design_page.dart';
 import 'package:cafe_reparo_mobile/pages/edit_account_page.dart';
 import 'package:cafe_reparo_mobile/pages/forgot_password_page.dart';
-import 'package:cafe_reparo_mobile/pages/signin_page.dart';
-import 'package:cafe_reparo_mobile/pages/signup_page.dart';
+import 'package:cafe_reparo_mobile/pages/home_page.dart';
+import 'package:cafe_reparo_mobile/pages/sign_in_page.dart';
+import 'package:cafe_reparo_mobile/pages/sign_up_page.dart';
 import 'package:cafe_reparo_mobile/themes/custom_themes.dart';
-import 'package:cafe_reparo_mobile/widget/Backgrounds/bg.dart';
-import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
-import 'package:cafe_reparo_mobile/widget/Cards/custom_big_card.dart';
-import 'package:cafe_reparo_mobile/widget/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -28,16 +25,16 @@ class MyApp extends StatelessWidget {
       title: 'Café Reparo',
       initialRoute: '/',
       routes: {
-        '/': (context) => const MyHomePage(
+        '/': (context) => const HomePage(
               title: "Repair Café",
             ),
         '/design': (context) => const Design(),
-        '/signup': (context) => const SignupScreen(),
-        '/signin': (context) => const SigninScreen(),
-        '/forgotpassword': (context) => const ForgotPasswordScreen(),
-        '/editaccount': (context) => const EditAccountScreen(),
-        '/changepassword': (context) => const ChangePasswordScreen(),
-        '/createservice': (context) => const CreateServiceScreen(),
+        '/sign-up': (context) => const SignupScreen(),
+        '/sign-in': (context) => const SigninScreen(),
+        '/forgot-password': (context) => const ForgotPasswordScreen(),
+        '/edit-account': (context) => const EditAccountScreen(),
+        '/change-password': (context) => const ChangePasswordScreen(),
+        '/create-service': (context) => const CreateServiceScreen(),
         '/contacts': (context) => const ContactsScreen(),
         '/adress': (context) => const AdressScreen(),
       },
@@ -50,49 +47,6 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [
         Locale('pt', 'BR'),
       ],
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  String? selectedItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const Header(),
-      body: Bg(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 80,
-            ),
-            CustomBigCard(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    purple.PurpleButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/signup');
-                        },
-                        text: "sign-up"),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

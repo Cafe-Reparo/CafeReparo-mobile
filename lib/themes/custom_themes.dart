@@ -1,5 +1,6 @@
-import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:flutter/material.dart';
+
+import 'colors.dart';
 
 class CustomThemes {
   static const textStyle = TextStyle(
@@ -25,7 +26,7 @@ class CustomThemes {
       ),
       titleLarge: TextStyle(
         fontSize: 34,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
       ),
       titleMedium: TextStyle(
         fontSize: 24,
@@ -51,6 +52,10 @@ class CustomThemes {
         fontSize: 12,
         fontWeight: FontWeight.w600,
       ),
+      labelMedium: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+      ),
       //labelSmall usado no botão
       labelSmall: TextStyle(
         fontSize: 16,
@@ -68,9 +73,18 @@ class CustomThemes {
       error: MyColors.red200,
       onPrimary: MyColors.primary100,
       onSecondary: MyColors.white10,
-      onSurface: MyColors.primary550,
+      onSurface: MyColors.primary500,
       onError: MyColors.primary100,
       brightness: Brightness.dark,
+    ),
+    //
+    snackBarTheme: const SnackBarThemeData(
+      backgroundColor: MyColors.secondary200,
+      contentTextStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: MyColors.primary100,
+      ),
     ),
     //
     datePickerTheme: const DatePickerThemeData(
@@ -133,6 +147,11 @@ class CustomThemes {
     ),
     //
     inputDecorationTheme: InputDecorationTheme(
+      errorStyle: const TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: MyColors.red50,
+      ),
       fillColor: MyColors.primary300,
       filled: true,
       prefixIconColor: MyColors.primary400,
