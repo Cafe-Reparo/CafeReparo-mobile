@@ -1,7 +1,9 @@
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../services/api_service.dart';
 import '../themes/colors.dart';
 import '../utils/validators.dart';
 import '../widget/Backgrounds/bg.dart';
@@ -31,7 +33,7 @@ class _SignupScreenState extends State<SignupScreen> {
   String? dateError;
   DateTime? selectedDate;
 
-  void _signup() async {
+  Future<Map<String, dynamic>?> userData() async {
     setState(() {
       // Aplicar validações nos campos
       nameError = Validators.validateName(nameController.text);
@@ -54,10 +56,16 @@ class _SignupScreenState extends State<SignupScreen> {
       confirmPwError,
       dateError
     ].any((error) => error != null)) {
-      return print("Erro");
-    } else {
-      Navigator.pushNamed(context, '/'); // Navegar para a página inicial
+      return null; // Retorna null em caso de erro
     }
+
+    return {
+      'name': nameController.text,
+      'surname': surnameController.text,
+      'email': emailController.text,
+      'password': passwordController.text,
+      'birthday': selectedDate.toString(),
+    };
   }
 
   @override
@@ -157,7 +165,18 @@ class _SignupScreenState extends State<SignupScreen> {
               SizedBox(
                 width: 400,
                 child: purple.PurpleButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final user = await userData();
+                    if (user != null) {
+                      await createUser(user);
+                      Navigator.pushNamed(context, '/');
+                    } else {
+                      // Mostrar mensagem de erro ou fazer outra ação necessária
+                      if (kDebugMode) {
+                        print("Erro na validação do usuário");
+                      }
+                    }
+                  },
                   text: 'Criar',
                   type: purple.ButtonType.fill,
                 ),

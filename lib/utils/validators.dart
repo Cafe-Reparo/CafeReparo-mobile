@@ -4,6 +4,10 @@ class Validators {
     if (value == null || value.isEmpty) {
       return 'Nome é obrigatório';
     }
+    RegExp letterRegex = RegExp(r'^[a-zA-Z]+$');
+    if (!letterRegex.hasMatch(value)) {
+      return 'Nome deve conter apenas letras';
+    }
     return null;
   }
 
@@ -19,6 +23,13 @@ class Validators {
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'E-mail é obrigatório';
+    }
+    // Regex pattern for basic email validation
+    RegExp emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+    if (!emailRegex.hasMatch(value)) {
+      return 'E-mail inválido';
     }
     return null;
   }

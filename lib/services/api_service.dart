@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:cafe_reparo_mobile/config.dart';
 import 'package:http/http.dart' as http;
 
 Future<Map<String, dynamic>> createUser(Map<String, dynamic> userData) async {
-  final url = Uri.parse('http://localhost:5000/api/user/create');
+  final url = Uri.parse(register);
   final headers = {'Content-Type': 'application/json'};
   try {
     final response = await http.post(

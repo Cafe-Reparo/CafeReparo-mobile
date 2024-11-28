@@ -37,11 +37,12 @@ class _SigninScreenState extends State<SigninScreen> {
                     ),
               ),
               const SizedBox(
-                height: 50,
+                height: 28,
               ),
               SizedBox(
                 width: 400,
                 child: TextField(
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                   controller: emailController,
                   decoration: InputDecoration(
                     errorText: emailError,
@@ -59,36 +60,33 @@ class _SigninScreenState extends State<SigninScreen> {
                 label: 'Senha',
               ),
               const SizedBox(
-                height: 10,
-              ),
-              Align(
-                alignment: Alignment.centerLeft, // Alinha o texto à esquerda
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/forgotpassword');
-                  },
-                  child: const Text(
-                    'Esqueceu a Senha?',
-                    style: TextStyle(
-                      color: Color.fromRGBO(80, 96, 255, 1.0),
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
+                height: 8,
               ),
               SizedBox(
                 width: 400,
-                height: 35,
+                child: Row(
+                  children: [
+                    LinkButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/forgot-password');
+                      },
+                      text: 'Esqueceu a Senha?',
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 28,
+              ),
+              SizedBox(
+                width: 400,
                 child: purple.PurpleButton(
                     onPressed: () => {},
                     text: "Entrar",
                     type: purple.ButtonType.fill),
               ),
               const SizedBox(
-                height: 15,
+                height: 28,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
