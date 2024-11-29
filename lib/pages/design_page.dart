@@ -94,7 +94,7 @@ class _DesignState extends State<Design> {
               const SizedBox(height: 20),
               IconPurpleButton(
                 type: ButtonType.outline,
-                icon: PhosphorIcons.plus,
+                icon: PhosphorIconsRegular.plus,
                 onPressed: () => {},
               ),
               const SizedBox(height: 20),
@@ -132,7 +132,8 @@ class _DesignState extends State<Design> {
               ),
               const SizedBox(height: 20),
               IconButton(
-                  onPressed: () => {}, icon: const Icon(PhosphorIcons.plus)),
+                  onPressed: () => {},
+                  icon: const Icon(PhosphorIconsRegular.plus)),
               const SizedBox(height: 20),
               purple.PurpleButton(
                   onPressed: () => {},
@@ -164,7 +165,7 @@ class _DesignState extends State<Design> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: const Icon(PhosphorIcons.plus),
+        child: const Icon(PhosphorIconsRegular.plus),
       ),
     );
   }

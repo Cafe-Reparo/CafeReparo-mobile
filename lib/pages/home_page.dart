@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
                           selectedRepair = value;
                         });
                       },
-                      prefixIcon: PhosphorIcons.storefront,
+                      prefixIcon: PhosphorIconsRegular.storefront,
                     ),
                     const SizedBox(height: 8),
                     CustomAutocomplete(
@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                             selectedRepair = value;
                           });
                         },
-                        prefixIcon: PhosphorIcons.sparkle),
+                        prefixIcon: PhosphorIconsRegular.sparkle),
                     const SizedBox(height: 8),
                     CustomAutocomplete(
                       width: 300,
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                           selectedRepair = value;
                         });
                       },
-                      prefixIcon: PhosphorIcons.mapTrifold,
+                      prefixIcon: PhosphorIconsRegular.mapTrifold,
                     ),
                   ],
                 ),
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                               .text, // Passa o valor atual do campo
                         );
                       },
-                      icon: PhosphorIcons.arrowRight,
+                      icon: PhosphorIconsRegular.arrowRight,
                     )
                   ],
                 ),
@@ -152,66 +152,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  // Widget buildServiceCard(Map<String, dynamic> service) {
-  //   return Container(
-  //     margin: EdgeInsets.only(bottom: 16),
-  //     padding: EdgeInsets.all(16),
-  //     decoration: BoxDecoration(
-  //       color: Colors.white,
-  //       borderRadius: BorderRadius.circular(10),
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: Colors.grey.withOpacity(0.3),
-  //           blurRadius: 5,
-  //           offset: Offset(0, 5),
-  //         ),
-  //       ],
-  //     ),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Text(
-  //           service['title'],
-  //           style: TextStyle(
-  //             color: primaryColor,
-  //             fontSize: 18,
-  //             fontWeight: FontWeight.bold,
-  //           ),
-  //         ),
-  //         SizedBox(height: 8),
-  //         Text(
-  //           service['location'],
-  //           style: TextStyle(
-  //             color: hintTextColor,
-  //             fontSize: 14,
-  //           ),
-  //         ),
-  //         SizedBox(height: 8),
-  //         Text(
-  //           service['description'],
-  //           style: TextStyle(
-  //             color: textColor,
-  //             fontSize: 14,
-  //           ),
-  //         ),
-  //         SizedBox(height: 12),
-  //         Wrap(
-  //           spacing: 8,
-  //           children: (service['expertise'] as List<String>)
-  //               .map(
-  //                 (expertise) => Chip(
-  //                   label: Text(
-  //                     expertise,
-  //                     style: TextStyle(color: Colors.white),
-  //                   ),
-  //                   backgroundColor: primaryColor,
-  //                 ),
-  //               )
-  //               .toList(),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

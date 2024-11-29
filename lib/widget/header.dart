@@ -44,7 +44,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                 Navigator.pushNamed(context, '/');
               },
               child: const Icon(
-                PhosphorIcons.coffee,
+                PhosphorIconsRegular.coffee,
                 size: 28,
                 color: MyColors.primary550,
               ),
@@ -56,7 +56,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                     size: ButtonSize.sm,
                     onPressed: () => {},
                     text: "Reparos",
-                    icon: PhosphorIcons.storefront,
+                    icon: PhosphorIconsRegular.storefront,
                   ),
                   const SizedBox(width: 12),
                 ],

@@ -93,7 +93,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   decoration: InputDecoration(
                     errorText: nameError,
                     labelText: 'Nome',
-                    prefixIcon: const Icon(PhosphorIcons.user),
+                    prefixIcon: const Icon(PhosphorIconsRegular.user),
                   ),
                 ),
               ),
@@ -108,7 +108,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   decoration: InputDecoration(
                     errorText: surnameError,
                     labelText: 'Sobrenome',
-                    prefixIcon: const Icon(PhosphorIcons.user),
+                    prefixIcon: const Icon(PhosphorIconsRegular.user),
                   ),
                 ),
               ),
@@ -123,7 +123,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   decoration: InputDecoration(
                     errorText: emailError,
                     labelText: 'E-mail',
-                    prefixIcon: const Icon(PhosphorIcons.envelope),
+                    prefixIcon: const Icon(PhosphorIconsRegular.envelope),
                   ),
                 ),
               ),

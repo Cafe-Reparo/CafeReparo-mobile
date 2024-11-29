@@ -42,7 +42,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                 child: TextField(
                   decoration: InputDecoration(
                     labelText: 'E-mail',
-                    prefixIcon: Icon(PhosphorIcons.envelope),
+                    prefixIcon: Icon(PhosphorIconsRegular.envelope),
                   ),
                 ),
               ),
@@ -72,7 +72,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                 child: TextField(
                   decoration: InputDecoration(
                     labelText: 'Nome',
-                    prefixIcon: Icon(PhosphorIcons.user),
+                    prefixIcon: Icon(PhosphorIconsRegular.user),
                   ),
                 ),
               ),
@@ -86,7 +86,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                   onPressed: () =>
                       {Navigator.pushNamed(context, '/changepassword')},
                   text: "Alterar senha",
-                  icon: PhosphorIcons.lock,
+                  icon: PhosphorIconsRegular.lock,
                   type: purple.ButtonType.outline,
                 ),
               ),

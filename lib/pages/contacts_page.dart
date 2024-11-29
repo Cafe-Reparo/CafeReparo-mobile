@@ -35,7 +35,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                       color: Color(0xFF5060FF),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(PhosphorIcons.storefront,
+                    child: Icon(PhosphorIconsRegular.storefront,
                         color: Colors.white, size: 25),
                   ),
                   SizedBox(width: 10),
@@ -66,7 +66,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                       color: Color(0xFF5060FF),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(PhosphorIcons.phone,
+                    child: Icon(PhosphorIconsRegular.phone,
                         color: Colors.white, size: 25),
                   ),
                   SizedBox(width: 10),
@@ -97,7 +97,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                       color: Color(0xFFE3E6FF),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(PhosphorIcons.mapPin,
+                    child: Icon(PhosphorIconsRegular.mapPin,
                         color: Color(0xFF5060FF), size: 25),
                   ),
                 ],
@@ -117,35 +117,35 @@ class _ContactsScreenState extends State<ContactsScreen> {
               TextField(
                 decoration: InputDecoration(
                   labelText: 'E-mail',
-                  prefixIcon: Icon(PhosphorIcons.envelopeSimple),
+                  prefixIcon: Icon(PhosphorIconsRegular.envelopeSimple),
                 ),
               ),
               const SizedBox(height: 15),
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Whatsapp',
-                  prefixIcon: Icon(PhosphorIcons.phone),
+                  prefixIcon: Icon(PhosphorIconsRegular.phone),
                 ),
               ),
               const SizedBox(height: 15),
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Link do Instagram',
-                  prefixIcon: Icon(PhosphorIcons.instagramLogo),
+                  prefixIcon: Icon(PhosphorIconsRegular.instagramLogo),
                 ),
               ),
               const SizedBox(height: 15),
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Link do Linkedin',
-                  prefixIcon: Icon(PhosphorIcons.linkedinLogo),
+                  prefixIcon: Icon(PhosphorIconsRegular.linkedinLogo),
                 ),
               ),
               const SizedBox(height: 15),
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Link do Facebook',
-                  prefixIcon: Icon(PhosphorIcons.facebookLogo),
+                  prefixIcon: Icon(PhosphorIconsRegular.facebookLogo),
                 ),
               ),
               const SizedBox(

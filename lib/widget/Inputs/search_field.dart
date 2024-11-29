@@ -43,11 +43,11 @@ class _SearchFieldState extends State<SearchField> {
             width: 50,
             height: 50,
             child: IconButton(
-              icon: const Icon(PhosphorIcons.funnel),
+              icon: const Icon(PhosphorIconsRegular.funnel),
               onPressed: (widget.onPressed),
             ),
           ),
-          prefixIcon: const Icon(PhosphorIcons.magnifyingGlass),
+          prefixIcon: const Icon(PhosphorIconsRegular.magnifyingGlass),
         ),
       ),
     );

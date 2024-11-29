@@ -27,6 +27,7 @@ class _SearchPageState extends State<SearchPage> {
     super.initState();
     searchController = TextEditingController(text: widget.query ?? '');
     filteredServices = services;
+    _filterServices(searchController.text);
   }
 
   void _filterServices(String query) {
@@ -66,6 +67,7 @@ class _SearchPageState extends State<SearchPage> {
           const SizedBox(height: 32),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SearchField(
                 errorText: errorText,
@@ -84,82 +86,101 @@ class _SearchPageState extends State<SearchPage> {
                   // Realiza o filtro ao pressionar o botão
                   _filterServices(searchController.text);
                 },
-                icon: PhosphorIcons.arrowRight,
+                icon: PhosphorIconsRegular.arrowRight,
               ),
             ],
           ),
           const SizedBox(height: 12),
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              itemCount: filteredServices.length, // Usa a lista filtrada
-              itemBuilder: (context, index) {
-                final service = filteredServices[index];
-                return CustomCard(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          service['title'],
-                          style: Theme.of(context)
-                              .primaryTextTheme
-                              .titleSmall
-                              ?.copyWith(
-                                color: MyColors.primary550,
+            child: filteredServices.isEmpty // Verifica se não há serviços
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        PhosphorIconsRegular.empty,
+                        size: 100,
+                        color: MyColors.primary300,
+                      ),
+                      Text(
+                        "Nenhum serviço encontrado",
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: MyColors.secondary200,
+                            ),
+                      ),
+                    ],
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
+                    itemCount: filteredServices.length, // Usa a lista filtrada
+                    itemBuilder: (context, index) {
+                      final service = filteredServices[index];
+                      return CustomCard(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                service['title'],
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .titleSmall
+                                    ?.copyWith(
+                                      color: MyColors.primary550,
+                                    ),
                               ),
-                        ),
-                        Text(
-                          service['location'],
-                          style: Theme.of(context)
-                              .primaryTextTheme
-                              .bodySmall
-                              ?.copyWith(
-                                color: MyColors.white100,
+                              Text(
+                                service['location'],
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color: MyColors.white100,
+                                    ),
                               ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          service['description'],
-                          style: Theme.of(context)
-                              .primaryTextTheme
-                              .labelMedium
-                              ?.copyWith(
-                                color: MyColors.secondary100,
+                              const SizedBox(height: 4),
+                              Text(
+                                service['description'],
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .labelMedium
+                                    ?.copyWith(
+                                      color: MyColors.secondary100,
+                                    ),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 16),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: List.generate(
-                              service['expertise'].length,
-                              (chipIndex) => Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: Chip(
-                                  label: Text(
-                                    service['expertise'][chipIndex],
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .labelLarge
-                                        ?.copyWith(
-                                          color: MyColors.secondary200,
+                              const SizedBox(height: 16),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: List.generate(
+                                    service['expertise'].length,
+                                    (chipIndex) => Padding(
+                                      padding: const EdgeInsets.only(right: 8),
+                                      child: Chip(
+                                        label: Text(
+                                          service['expertise'][chipIndex],
+                                          style: Theme.of(context)
+                                              .primaryTextTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                color: MyColors.secondary200,
+                                              ),
                                         ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),

@@ -47,7 +47,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   decoration: InputDecoration(
                     errorText: emailError,
                     labelText: 'E-mail',
-                    prefixIcon: const Icon(PhosphorIcons.envelope),
+                    prefixIcon: const Icon(PhosphorIconsRegular.envelope),
                   ),
                 ),
               ),

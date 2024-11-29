@@ -39,8 +39,8 @@ class _PasswordFieldState extends State<PasswordField> {
           suffixIcon: IconButton(
             icon: Icon(
               obscureText
-                  ? PhosphorIcons.eyeClosed // Ícone de olho fechado
-                  : PhosphorIcons.eye, // Ícone de olho aberto
+                  ? PhosphorIconsRegular.eyeClosed // Ícone de olho fechado
+                  : PhosphorIconsRegular.eye, // Ícone de olho aberto
             ),
             onPressed: () {
               setState(() {
@@ -48,7 +48,7 @@ class _PasswordFieldState extends State<PasswordField> {
               });
             },
           ),
-          prefixIcon: const Icon(PhosphorIcons.lock),
+          prefixIcon: const Icon(PhosphorIconsRegular.lock),
         ),
       ),
     );

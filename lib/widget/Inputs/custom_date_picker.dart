@@ -14,7 +14,7 @@ class CustomDatePicker extends StatefulWidget {
   const CustomDatePicker({
     super.key,
     this.buttonText = 'Selecionar Data',
-    this.icon = PhosphorIcons.calendar,
+    this.icon = PhosphorIconsRegular.calendar,
     required this.onDateSelected,
     this.errorText = 'Date is required',
     this.initialDate,

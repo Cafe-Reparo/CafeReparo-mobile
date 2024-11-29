@@ -49,7 +49,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 child: TextField(
                   decoration: InputDecoration(
                     labelText: 'E-mail',
-                    prefixIcon: Icon(PhosphorIcons.envelope),
+                    prefixIcon: Icon(PhosphorIconsRegular.envelope),
                   ),
                 ),
               ),
