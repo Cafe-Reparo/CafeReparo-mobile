@@ -10,6 +10,7 @@ class SearchField extends StatefulWidget {
   final VoidCallback? onPressed;
   final VoidCallback? onSubmitted;
   final double width;
+  final Function(String)? onChanged;
 
   const SearchField({
     super.key,
@@ -17,6 +18,7 @@ class SearchField extends StatefulWidget {
     this.errorText,
     this.label = 'Search',
     this.width = 280,
+    this.onChanged,
     required this.onPressed,
     required this.controller,
   });
@@ -31,6 +33,7 @@ class _SearchFieldState extends State<SearchField> {
     return SizedBox(
       width: widget.width,
       child: TextField(
+        onChanged: widget.onChanged,
         controller: widget.controller,
         style: const TextStyle(fontWeight: FontWeight.w600),
         decoration: InputDecoration(

@@ -19,12 +19,36 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   late TextEditingController searchController;
+  List<Map<String, dynamic>> filteredServices = [];
+  String? errorText;
 
   @override
   void initState() {
     super.initState();
-    // Inicializa o controlador com a query passada
     searchController = TextEditingController(text: widget.query ?? '');
+    filteredServices = services;
+  }
+
+  void _filterServices(String query) {
+    // Realiza a busca apenas se o texto tiver pelo menos 3 caracteres
+    if (query.length >= 3) {
+      setState(() {
+        errorText = null; // Limpa a mensagem de erro
+        filteredServices = services.where((service) {
+          return service['title'].toLowerCase().contains(query.toLowerCase()) ||
+              service['description']
+                  .toLowerCase()
+                  .contains(query.toLowerCase());
+        }).toList();
+      });
+    } else {
+      setState(() {
+        errorText =
+            "Digite acima de 3 letras para pesquisar"; // Exibe a mensagem de erro
+        filteredServices =
+            []; // Limpa a lista de resultados enquanto o erro é exibido
+      });
+    }
   }
 
   @override
@@ -44,25 +68,21 @@ class _SearchPageState extends State<SearchPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SearchField(
-                onPressed: () {
+                errorText: errorText,
+                onChanged: (query) {
                   setState(() {
-                    // Lógica opcional ao interagir com o campo
+                    errorText = null;
                   });
                 },
+                onPressed: () {},
                 width: 300,
                 controller: searchController,
               ),
               const SizedBox(width: 8),
               IconPurpleButton(
                 onPressed: () {
-                  // Navegação interna para atualizar a pesquisa
-                  String newQuery = searchController.text;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SearchPage(query: newQuery),
-                    ),
-                  );
+                  // Realiza o filtro ao pressionar o botão
+                  _filterServices(searchController.text);
                 },
                 icon: PhosphorIcons.arrowRight,
               ),
@@ -72,9 +92,9 @@ class _SearchPageState extends State<SearchPage> {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              itemCount: services.length,
+              itemCount: filteredServices.length, // Usa a lista filtrada
               itemBuilder: (context, index) {
-                final service = services[index];
+                final service = filteredServices[index];
                 return CustomCard(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
