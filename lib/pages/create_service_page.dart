@@ -17,7 +17,8 @@ class CreateServiceScreen extends StatefulWidget {
 }
 
 class _CreateServiceScreenState extends State<CreateServiceScreen> {
-  String? selectedItem;
+  String? selectedRepair;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,24 +124,15 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
               ),
               const SizedBox(height: 20),
               CustomDropdown(
-                value: selectedItem,
-                prefixIcon: (PhosphorIcons.sparkle),
-                hintText: 'Especialidade (Opcional)',
-                items: const [
-                  DropdownMenuItem(
-                    value: 'Item 1',
-                    child: Text('Item 1'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Item 2',
-                    child: Text('Item 2'),
-                  ),
-                ],
+                hintText: 'Localização',
+                value: selectedRepair,
+                items: const ['Pintura', 'Hidráulica', 'Elétrica'],
                 onChanged: (value) {
                   setState(() {
-                    selectedItem = value;
+                    selectedRepair = value;
                   });
                 },
+                prefixIcon: Icons.build,
               ),
               const SizedBox(height: 20),
               TextField(

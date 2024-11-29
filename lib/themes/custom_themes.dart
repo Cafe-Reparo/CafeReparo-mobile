@@ -50,11 +50,11 @@ class CustomThemes {
       ),
       labelLarge: TextStyle(
         fontSize: 12,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w700,
       ),
       labelMedium: TextStyle(
         fontSize: 12,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w400,
       ),
       //labelSmall usado no botão
       labelSmall: TextStyle(
@@ -177,8 +177,8 @@ class CustomThemes {
     //
     chipTheme: ChipThemeData(
       backgroundColor: MyColors.primary300,
-      labelPadding: const EdgeInsets.symmetric(horizontal: 6),
-      padding: const EdgeInsets.symmetric(horizontal: 4),
+      labelPadding: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
       side: const BorderSide(
         color: Colors.transparent,
       ),

@@ -6,6 +6,7 @@ import 'package:cafe_reparo_mobile/pages/design_page.dart';
 import 'package:cafe_reparo_mobile/pages/edit_account_page.dart';
 import 'package:cafe_reparo_mobile/pages/forgot_password_page.dart';
 import 'package:cafe_reparo_mobile/pages/home_page.dart';
+import 'package:cafe_reparo_mobile/pages/search_page.dart';
 import 'package:cafe_reparo_mobile/pages/sign_in_page.dart';
 import 'package:cafe_reparo_mobile/pages/sign_up_page.dart';
 import 'package:cafe_reparo_mobile/themes/custom_themes.dart';
@@ -25,12 +26,14 @@ class MyApp extends StatelessWidget {
       title: 'Café Reparo',
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(
-              title: "Repair Café",
-            ),
+        '/': (context) => HomePage(title: 'Café Reparo'),
         '/design': (context) => const Design(),
         '/sign-up': (context) => const SignupScreen(),
         '/sign-in': (context) => const SigninScreen(),
+        '/search-page': (context) {
+          final args = ModalRoute.of(context)?.settings.arguments as String?;
+          return SearchPage(query: args);
+        },
         '/forgot-password': (context) => const ForgotPasswordScreen(),
         '/edit-account': (context) => const EditAccountScreen(),
         '/change-password': (context) => const ChangePasswordScreen(),

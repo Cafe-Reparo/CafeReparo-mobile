@@ -22,6 +22,7 @@ class Design extends StatefulWidget {
 }
 
 bool dateError = false;
+String? selectedRepair;
 
 class _DesignState extends State<Design> {
   String? selectedItem;
@@ -110,22 +111,15 @@ class _DesignState extends State<Design> {
               ),
               const SizedBox(height: 20),
               CustomDropdown(
-                value: selectedItem,
-                items: const [
-                  DropdownMenuItem(
-                    value: 'Item 1',
-                    child: Text('Item 1'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Item 2',
-                    child: Text('Item 2'),
-                  ),
-                ],
+                hintText: 'Especialidade',
+                value: selectedRepair,
+                items: const ['Pintura', 'Hidráulica', 'Elétrica'],
                 onChanged: (value) {
                   setState(() {
-                    selectedItem = value;
+                    selectedRepair = value;
                   });
                 },
+                prefixIcon: Icons.build,
               ),
               const SizedBox(height: 20),
               const SizedBox(

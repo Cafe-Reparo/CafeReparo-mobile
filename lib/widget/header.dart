@@ -39,10 +39,15 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Icon(
-              PhosphorIcons.coffee,
-              size: 28,
-              color: MyColors.primary550,
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/');
+              },
+              child: const Icon(
+                PhosphorIcons.coffee,
+                size: 28,
+                color: MyColors.primary550,
+              ),
             ),
             Row(
               children: [

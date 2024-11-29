@@ -16,7 +16,7 @@ class SearchField extends StatefulWidget {
     this.onSubmitted,
     this.errorText,
     this.label = 'Search',
-    this.width = 400,
+    this.width = 280,
     required this.onPressed,
     required this.controller,
   });
@@ -26,7 +26,6 @@ class SearchField extends StatefulWidget {
 }
 
 class _SearchFieldState extends State<SearchField> {
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -37,9 +36,13 @@ class _SearchFieldState extends State<SearchField> {
         decoration: InputDecoration(
           errorText: widget.errorText,
           labelText: widget.label, // Usar o parâmetro label aqui
-          suffixIcon: IconButton(
-            icon: const Icon(PhosphorIcons.funnel),
-            onPressed: (widget.onPressed),
+          suffixIcon: Container(
+            width: 50,
+            height: 50,
+            child: IconButton(
+              icon: const Icon(PhosphorIcons.funnel),
+              onPressed: (widget.onPressed),
+            ),
           ),
           prefixIcon: const Icon(PhosphorIcons.magnifyingGlass),
         ),
