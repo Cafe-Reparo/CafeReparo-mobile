@@ -1,14 +1,13 @@
-import 'package:cafe_reparo_mobile/pages/adress_page.dart';
-import 'package:cafe_reparo_mobile/pages/change_password_page.dart';
-import 'package:cafe_reparo_mobile/pages/contacts_page.dart';
-import 'package:cafe_reparo_mobile/pages/create_service_page.dart';
+import 'package:cafe_reparo_mobile/pages/Service/adress_page.dart';
+import 'package:cafe_reparo_mobile/pages/Service/contacts_page.dart';
+import 'package:cafe_reparo_mobile/pages/Service/create_service_page.dart';
+import 'package:cafe_reparo_mobile/pages/User/change_password_page.dart';
+import 'package:cafe_reparo_mobile/pages/User/edit_account_page.dart';
+import 'package:cafe_reparo_mobile/pages/User/forgot_password_page.dart';
+import 'package:cafe_reparo_mobile/pages/User/sign_in_page.dart';
+import 'package:cafe_reparo_mobile/pages/User/sign_up_page.dart';
 import 'package:cafe_reparo_mobile/pages/design_page.dart';
-import 'package:cafe_reparo_mobile/pages/edit_account_page.dart';
-import 'package:cafe_reparo_mobile/pages/forgot_password_page.dart';
-import 'package:cafe_reparo_mobile/pages/home_page.dart';
 import 'package:cafe_reparo_mobile/pages/search_page.dart';
-import 'package:cafe_reparo_mobile/pages/sign_in_page.dart';
-import 'package:cafe_reparo_mobile/pages/sign_up_page.dart';
 import 'package:cafe_reparo_mobile/themes/custom_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -24,9 +23,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Café Reparo',
-      initialRoute: '/',
+      initialRoute: '/create-service',
       routes: {
-        '/': (context) => HomePage(title: 'Café Reparo'),
+        '/': (context) => const EditAccountScreen(),
         '/design': (context) => const Design(),
         '/sign-up': (context) => const SignupScreen(),
         '/sign-in': (context) => const SigninScreen(),

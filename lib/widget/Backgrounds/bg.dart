@@ -6,10 +6,12 @@ import '../Cards/custom_big_card.dart';
 class Bg extends StatelessWidget {
   final Widget child;
   final double padding;
+  final double minusSizedBoxHeight;
 
   const Bg({
     required this.child,
     this.padding = 24,
+    this.minusSizedBoxHeight = 595,
     super.key,
   });
 
@@ -42,13 +44,16 @@ class Bg extends StatelessWidget {
             ),
           ),
           SingleChildScrollView(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 45,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [CustomBigCard(padding: padding, child: child)],
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height -
+                      45 -
+                      minusSizedBoxHeight, // Ajuste este valor conforme o tamanho do card
+                ),
+                CustomBigCard(padding: padding, child: child),
+              ],
             ),
           ),
         ],

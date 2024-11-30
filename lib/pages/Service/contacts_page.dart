@@ -1,11 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cafe_reparo_mobile/widget/Buttons/icon_purple_button.dart'
+    as iconButton;
+import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-import '../themes/colors.dart';
-import '../widget/Backgrounds/bg.dart';
-import '../widget/header.dart';
+import '../../themes/colors.dart';
+import '../../widget/Backgrounds/bg.dart';
+import '../../widget/header.dart';
 
 class ContactsScreen extends StatefulWidget {
   const ContactsScreen({super.key, String? selectedItem});
@@ -22,6 +25,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
     return Scaffold(
       appBar: const Header(),
       body: Bg(
+        minusSizedBoxHeight: 550,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -30,21 +34,27 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF5060FF),
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [
+                          MyColors.primary400,
+                          MyColors.primary550,
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
                     ),
                     child: Icon(PhosphorIconsRegular.storefront,
                         color: Colors.white, size: 25),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 4),
                   Container(
                     width: 8,
                     height: 8,
@@ -53,29 +63,33 @@ class _ContactsScreenState extends State<ContactsScreen> {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  SizedBox(width: 4),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    padding: EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF5060FF),
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [
+                          MyColors.primary400,
+                          MyColors.primary550,
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
                     ),
                     child: Icon(PhosphorIconsRegular.phone,
                         color: Colors.white, size: 25),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 4),
                   Container(
                     width: 8,
                     height: 8,
@@ -84,15 +98,14 @@ class _ContactsScreenState extends State<ContactsScreen> {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  SizedBox(width: 4),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    padding: EdgeInsets.all(6.0),
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
                       color: Color(0xFFE3E6FF),
                       shape: BoxShape.circle,
@@ -103,100 +116,77 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 ],
               ),
               const SizedBox(
-                height: 40,
+                height: 28,
               ),
               Text(
                 'Contato e redes',
-                style: Theme.of(context).primaryTextTheme.titleLarge?.copyWith(
+                style: Theme.of(context).primaryTextTheme.titleMedium?.copyWith(
                       color: MyColors.primary500,
                     ),
               ),
               const SizedBox(
-                height: 40,
+                height: 28,
               ),
               TextField(
+                style: TextStyle(fontWeight: FontWeight.w600),
                 decoration: InputDecoration(
                   labelText: 'E-mail',
                   prefixIcon: Icon(PhosphorIconsRegular.envelopeSimple),
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
               TextField(
+                style: TextStyle(fontWeight: FontWeight.w600),
                 decoration: InputDecoration(
                   labelText: 'Whatsapp',
                   prefixIcon: Icon(PhosphorIconsRegular.phone),
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
               TextField(
+                style: TextStyle(fontWeight: FontWeight.w600),
                 decoration: InputDecoration(
                   labelText: 'Link do Instagram',
                   prefixIcon: Icon(PhosphorIconsRegular.instagramLogo),
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
               TextField(
+                style: TextStyle(fontWeight: FontWeight.w600),
                 decoration: InputDecoration(
                   labelText: 'Link do Linkedin',
                   prefixIcon: Icon(PhosphorIconsRegular.linkedinLogo),
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
               TextField(
+                style: TextStyle(fontWeight: FontWeight.w600),
                 decoration: InputDecoration(
                   labelText: 'Link do Facebook',
                   prefixIcon: Icon(PhosphorIconsRegular.facebookLogo),
                 ),
               ),
               const SizedBox(
-                height: 35,
+                height: 28,
               ),
               Row(
                 children: [
-                  Flexible(
-                    flex: 1,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/createservice');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        side: BorderSide(color: Color(0xFF5060FF)),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        minimumSize: Size(double.infinity, 50),
-                      ),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: Color(0xFF5060FF),
-                      ),
-                    ),
+                  iconButton.IconPurpleButton(
+                    onPressed: () =>
+                        {Navigator.pushNamed(context, '/create-service')},
+                    type: iconButton.ButtonType.outline,
+                    icon: PhosphorIconsRegular.arrowBendUpLeft,
                   ),
-                  SizedBox(width: 10),
-                  Flexible(
-                    flex: 4,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/adress');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF5060FF),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        minimumSize: Size(double.infinity, 50),
-                      ),
-                      child: Text(
-                        'Confirmar',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                  SizedBox(width: 20),
+                  SizedBox(
+                    width: 237,
+                    child: PurpleButton(
+                      onPressed: () =>
+                          {Navigator.pushNamed(context, '/adress')},
+                      text: "Avançar",
                     ),
                   ),
                 ],
-              ),
-              const SizedBox(
-                height: 15,
               ),
             ],
           ),

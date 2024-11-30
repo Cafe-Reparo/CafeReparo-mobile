@@ -26,11 +26,11 @@ class CustomThemes {
       ),
       titleLarge: TextStyle(
         fontSize: 34,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w400,
       ),
       titleMedium: TextStyle(
         fontSize: 24,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w400,
       ),
       titleSmall: TextStyle(
         fontSize: 20,

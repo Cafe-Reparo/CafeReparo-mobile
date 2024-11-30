@@ -1,10 +1,10 @@
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
 import 'package:flutter/material.dart';
 
-import '../themes/colors.dart';
-import '../widget/Backgrounds/bg.dart';
-import '../widget/Inputs/password_field.dart';
-import '../widget/header.dart';
+import '../../themes/colors.dart';
+import '../../widget/Backgrounds/bg.dart';
+import '../../widget/Inputs/password_field.dart';
+import '../../widget/header.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key, String? selectedItem});
@@ -20,6 +20,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return Scaffold(
       appBar: const Header(),
       body: Bg(
+        minusSizedBoxHeight: 334,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +50,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               ),
               SizedBox(
                 width: 400,
-                height: 35,
                 child: purple.PurpleButton(
                     onPressed: () => {},
                     text: "Confirmar",

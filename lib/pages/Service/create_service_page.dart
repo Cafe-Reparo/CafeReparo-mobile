@@ -4,10 +4,10 @@ import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-import '../themes/colors.dart';
-import '../widget/Backgrounds/bg.dart';
-import '../widget/Inputs/custom_dropdown.dart';
-import '../widget/header.dart';
+import '../../themes/colors.dart';
+import '../../widget/Backgrounds/bg.dart';
+import '../../widget/Inputs/custom_autocomplete.dart';
+import '../../widget/header.dart';
 
 class CreateServiceScreen extends StatefulWidget {
   const CreateServiceScreen({super.key, String? selectedItem});
@@ -24,6 +24,7 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
     return Scaffold(
       appBar: const Header(),
       body: Bg(
+        minusSizedBoxHeight: 521,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -32,21 +33,29 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF5060FF),
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [
+                          MyColors.primary400,
+                          MyColors.primary550,
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
                     ),
-                    child: Icon(PhosphorIconsRegular.storefront,
-                        color: Colors.white, size: 25),
+                    child: Icon(
+                      PhosphorIconsRegular.storefront,
+                      color: MyColors.primary100,
+                    ),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 4),
                   Container(
                     width: 8,
                     height: 8,
@@ -55,15 +64,14 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  SizedBox(width: 4),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    padding: EdgeInsets.all(6.0),
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
                       color: Color(0xFFE3E6FF),
                       shape: BoxShape.circle,
@@ -71,13 +79,11 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
                     child: Icon(PhosphorIconsRegular.phone,
                         color: Color(0xFF5060FF), size: 25),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 4),
                   Container(
                     width: 8,
                     height: 8,
@@ -86,15 +92,14 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  SizedBox(width: 4),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    padding: EdgeInsets.all(6.0),
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
                       color: Color(0xFFE3E6FF),
                       shape: BoxShape.circle,
@@ -105,52 +110,49 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
                 ],
               ),
               const SizedBox(
-                height: 40,
+                height: 28,
               ),
               Text(
                 'Básico',
-                style: Theme.of(context).primaryTextTheme.titleLarge?.copyWith(
+                style: Theme.of(context).primaryTextTheme.titleMedium?.copyWith(
                       color: MyColors.primary500,
                     ),
               ),
               const SizedBox(
-                height: 40,
+                height: 28,
               ),
               TextField(
+                style: TextStyle(fontWeight: FontWeight.w600),
                 decoration: InputDecoration(
                   labelText: 'Serviço',
                   prefixIcon: Icon(PhosphorIconsRegular.storefront),
                 ),
               ),
-              const SizedBox(height: 20),
-              CustomDropdown(
-                hintText: 'Localização',
-                value: selectedRepair,
-                items: const ['Pintura', 'Hidráulica', 'Elétrica'],
-                onChanged: (value) {
-                  setState(() {
-                    selectedRepair = value;
-                  });
-                },
-                prefixIcon: Icons.build,
-              ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
+              CustomAutocomplete(
+                  width: 315,
+                  hintText: 'Especialidade (opcional)',
+                  value: selectedRepair,
+                  items: const ['Pintura', 'Hidráulica', 'Elétrica'],
+                  onChanged: (value) {
+                    setState(() {
+                      selectedRepair = value;
+                    });
+                  },
+                  prefixIcon: PhosphorIconsRegular.sparkle),
+              const SizedBox(height: 10),
               TextField(
+                style: TextStyle(fontWeight: FontWeight.w600),
                 maxLines: 4,
                 decoration: InputDecoration(
                   labelText: 'Escreva sua descrição aqui...',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 28,
               ),
               SizedBox(
                 width: 400,
-                height: 35,
                 child: purple.PurpleButton(
                     onPressed: () =>
                         {Navigator.pushNamed(context, '/contacts')},

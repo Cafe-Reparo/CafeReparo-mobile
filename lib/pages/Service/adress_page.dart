@@ -3,9 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-import '../themes/colors.dart';
-import '../widget/Backgrounds/bg.dart';
-import '../widget/header.dart';
+import '../../themes/colors.dart';
+import '../../widget/Backgrounds/bg.dart';
+import '../../widget/Buttons/icon_purple_button.dart' as iconButton;
+import '../../widget/Buttons/purple_button.dart';
+import '../../widget/header.dart';
 
 class AdressScreen extends StatefulWidget {
   const AdressScreen({super.key, String? selectedItem});
@@ -22,6 +24,7 @@ class _AdressScreenState extends State<AdressScreen> {
     return Scaffold(
       appBar: const Header(),
       body: Bg(
+        minusSizedBoxHeight: 434,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -30,21 +33,27 @@ class _AdressScreenState extends State<AdressScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF5060FF),
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [
+                          MyColors.primary400,
+                          MyColors.primary550,
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
                     ),
                     child: Icon(PhosphorIconsRegular.storefront,
                         color: Colors.white, size: 25),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 4),
                   Container(
                     width: 8,
                     height: 8,
@@ -53,29 +62,33 @@ class _AdressScreenState extends State<AdressScreen> {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  SizedBox(width: 4),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    padding: EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF5060FF),
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [
+                          MyColors.primary400,
+                          MyColors.primary550,
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
                     ),
                     child: Icon(PhosphorIconsRegular.phone,
                         color: Colors.white, size: 25),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 4),
                   Container(
                     width: 8,
                     height: 8,
@@ -84,18 +97,24 @@ class _AdressScreenState extends State<AdressScreen> {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  SizedBox(width: 4),
                   Container(
-                    height: 2,
+                    height: 1,
                     width: 20,
                     color: Color(0xFF5060FF),
                   ),
-                  SizedBox(width: 10),
                   Container(
-                    padding: EdgeInsets.all(6.0),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF5060FF),
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [
+                          MyColors.primary400,
+                          MyColors.primary550,
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
                     ),
                     child: Icon(PhosphorIconsRegular.mapPin,
                         color: Color(0xFFE3E6FF), size: 25),
@@ -103,81 +122,58 @@ class _AdressScreenState extends State<AdressScreen> {
                 ],
               ),
               const SizedBox(
-                height: 40,
+                height: 28,
               ),
               Text(
                 'Endereço',
-                style: Theme.of(context).primaryTextTheme.titleLarge?.copyWith(
+                style: Theme.of(context).primaryTextTheme.titleMedium?.copyWith(
                       color: MyColors.primary500,
                     ),
               ),
               const SizedBox(
-                height: 40,
+                height: 28,
               ),
               TextField(
+                style: TextStyle(fontWeight: FontWeight.w600),
                 decoration: InputDecoration(
                   labelText: 'Cidade',
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
               TextField(
+                style: TextStyle(fontWeight: FontWeight.w600),
                 decoration: InputDecoration(
                   labelText: 'Rua',
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
               TextField(
+                style: TextStyle(fontWeight: FontWeight.w600),
                 decoration: InputDecoration(
                   labelText: 'Número',
                 ),
               ),
               const SizedBox(
-                height: 35,
+                height: 28,
               ),
               Row(
                 children: [
-                  Flexible(
-                    flex: 1,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/contacts');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        side: BorderSide(color: Color(0xFF5060FF)),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        minimumSize: Size(double.infinity, 50),
-                      ),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: Color(0xFF5060FF),
-                      ),
-                    ),
+                  iconButton.IconPurpleButton(
+                    onPressed: () =>
+                        {Navigator.pushNamed(context, '/contacts')},
+                    type: iconButton.ButtonType.outline,
+                    icon: PhosphorIconsRegular.arrowBendUpLeft,
                   ),
-                  SizedBox(width: 10),
-                  Flexible(
-                    flex: 4,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF5060FF),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        minimumSize: Size(double.infinity, 50),
-                      ),
-                      child: Text(
-                        'Confirmar',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                  SizedBox(width: 20),
+                  SizedBox(
+                    width: 237,
+                    child: PurpleButton(
+                      onPressed: () =>
+                          {Navigator.pushNamed(context, '/adress')},
+                      text: "Confirmar",
                     ),
                   ),
                 ],
-              ),
-              const SizedBox(
-                height: 15,
               ),
             ],
           ),

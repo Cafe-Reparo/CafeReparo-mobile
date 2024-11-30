@@ -2,9 +2,9 @@ import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-import '../themes/colors.dart';
-import '../widget/Backgrounds/bg.dart';
-import '../widget/header.dart';
+import '../../themes/colors.dart';
+import '../../widget/Backgrounds/bg.dart';
+import '../../widget/header.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key, String? selectedItem});
@@ -20,10 +20,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     return Scaffold(
       appBar: const Header(showRepairButton: false, showAvatar: false),
       body: Bg(
+        minusSizedBoxHeight: 307,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
               Text(
                 'Esqueceu a senha?',
                 style: Theme.of(context).primaryTextTheme.titleLarge?.copyWith(
@@ -32,7 +33,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
               ),
               const SizedBox(
-                height: 10,
+                height: 8,
               ),
               const Center(
                 child: Text(
@@ -42,7 +43,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
               ),
               const SizedBox(
-                height: 40,
+                height: 24,
               ),
               const SizedBox(
                 width: 400,
@@ -54,19 +55,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
               ),
               const SizedBox(
-                height: 25,
+                height: 32,
               ),
               SizedBox(
                 width: 400,
-                height: 35,
                 child: purple.PurpleButton(
                     onPressed: () =>
-                        {Navigator.pushNamed(context, '/verifyemail')},
+                        {Navigator.pushNamed(context, '/change-password')},
                     text: "Avançar",
                     type: purple.ButtonType.fill),
-              ),
-              const SizedBox(
-                height: 15,
               ),
             ],
           ),

@@ -2,11 +2,11 @@ import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-import '../themes/colors.dart';
-import '../widget/Backgrounds/bg.dart';
-import '../widget/Buttons/link_button.dart';
-import '../widget/Inputs/password_field.dart';
-import '../widget/header.dart';
+import '../../themes/colors.dart';
+import '../../widget/Backgrounds/bg.dart';
+import '../../widget/Buttons/link_button.dart';
+import '../../widget/Inputs/password_field.dart';
+import '../../widget/header.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -26,6 +26,7 @@ class _SigninScreenState extends State<SigninScreen> {
     return Scaffold(
       appBar: const Header(showRepairButton: false, showAvatar: false),
       body: Bg(
+        minusSizedBoxHeight: 403,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

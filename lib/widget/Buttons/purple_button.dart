@@ -18,7 +18,7 @@ class PurpleButton extends StatelessWidget {
     this.size = ButtonSize.md, // Valor padrão para o tamanho
     this.icon,
     required this.onPressed,
-    required this.text,  
+    required this.text,
     this.prefixIcon, // Adiciona prefixIcon aqui
   });
 
@@ -133,13 +133,15 @@ class PurpleButton extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (prefixIcon != null) ...[ // Verifica se prefixIcon está presente
+              if (prefixIcon != null) ...[
+                // Verifica se prefixIcon está presente
                 Icon(
                   prefixIcon!.icon,
                   size: _getIconSize(), // Usa o tamanho do ícone definido
                   color: _getIconColor(), // Aplica a cor mais escura
                 ),
-                const SizedBox(width: 8), // Espaçamento entre o prefixIcon e o texto
+                const SizedBox(
+                    width: 8), // Espaçamento entre o prefixIcon e o texto
               ],
               if (icon != null) ...[
                 Icon(
@@ -147,7 +149,6 @@ class PurpleButton extends StatelessWidget {
                   size: _getIconSize(), // Usa o tamanho do ícone definido
                   color: _getIconColor(), // Aplica a cor mais escura
                 ),
-                const SizedBox(width: 8),
               ],
               Text(
                 text,

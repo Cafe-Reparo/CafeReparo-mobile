@@ -1,11 +1,12 @@
 import 'package:cafe_reparo_mobile/widget/Backgrounds/bg.dart';
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
+import 'package:cafe_reparo_mobile/widget/Buttons/red_button.dart';
 import 'package:cafe_reparo_mobile/widget/header.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-import '../themes/colors.dart';
-import '../widget/Inputs/custom_date_picker.dart';
+import '../../themes/colors.dart';
+import '../../widget/Inputs/custom_date_picker.dart';
 
 bool dateError = false;
 
@@ -17,17 +18,19 @@ class EditAccountScreen extends StatefulWidget {
 }
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
+  String? dateError;
   DateTime? selectedDate;
-  String? selectedItem;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const Header(),
       body: Bg(
+        minusSizedBoxHeight: 516,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
               Text(
                 'Editar conta',
                 style: Theme.of(context).primaryTextTheme.titleLarge?.copyWith(
@@ -35,11 +38,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                     ),
               ),
               const SizedBox(
-                height: 50,
+                height: 32,
               ),
               const SizedBox(
                 width: 400,
                 child: TextField(
+                  style: TextStyle(fontWeight: FontWeight.w600),
                   decoration: InputDecoration(
                     labelText: 'E-mail',
                     prefixIcon: Icon(PhosphorIconsRegular.envelope),
@@ -47,29 +51,29 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                 ),
               ),
               const SizedBox(
-                height: 15,
+                height: 10,
               ),
               SizedBox(
                 width: 400,
                 child: CustomDatePicker(
                   // Seletor de data para data de lançamento
                   initialDate: selectedDate,
-                  errorText: "Release date is required",
-                  buttonText: "Select a release date",
+                  errorText: dateError ?? '',
+                  buttonText: "Data de nascimento",
                   onDateSelected: (date) {
                     setState(() {
                       selectedDate = date;
-                      dateError = date == null;
                     });
                   },
                 ),
               ),
               const SizedBox(
-                height: 15,
+                height: 10,
               ),
               const SizedBox(
                 width: 400,
                 child: TextField(
+                  style: TextStyle(fontWeight: FontWeight.w600),
                   decoration: InputDecoration(
                     labelText: 'Nome',
                     prefixIcon: Icon(PhosphorIconsRegular.user),
@@ -77,25 +81,36 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                 ),
               ),
               const SizedBox(
-                height: 15,
+                height: 10,
               ),
               SizedBox(
                 width: 400,
-                height: 35,
                 child: purple.PurpleButton(
                   onPressed: () =>
-                      {Navigator.pushNamed(context, '/changepassword')},
+                      {Navigator.pushNamed(context, '/change-password')},
                   text: "Alterar senha",
                   icon: PhosphorIconsRegular.lock,
                   type: purple.ButtonType.outline,
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               SizedBox(
                 width: 400,
-                height: 35,
+                child: RedButton(
+                  onPressed: () =>
+                      {Navigator.pushNamed(context, '/change-password')},
+                  text: "Sair da conta",
+                  icon: PhosphorIconsRegular.signOut,
+                  type: ButtonType.outline,
+                ),
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              SizedBox(
+                width: 400,
                 child: purple.PurpleButton(
                     onPressed: () => {},
                     text: "Salvar",

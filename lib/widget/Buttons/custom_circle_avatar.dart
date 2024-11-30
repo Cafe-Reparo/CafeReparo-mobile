@@ -1,5 +1,6 @@
 import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class CustomCircleAvatar extends StatelessWidget {
   final String? text;
@@ -36,7 +37,7 @@ class CustomCircleAvatar extends StatelessWidget {
                           ),
                 )
               : const Icon(
-                  Icons.person,
+                  PhosphorIconsRegular.user,
                   size: 24,
                   color: MyColors.primary500,
                 ),
