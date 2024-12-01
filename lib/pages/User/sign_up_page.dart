@@ -1,5 +1,4 @@
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -33,7 +32,7 @@ class _SignupScreenState extends State<SignupScreen> {
   String? dateError;
   DateTime? selectedDate;
 
-  Future<Map<String, dynamic>?> userData() async {
+  void createUser() async {
     setState(() {
       // Aplicar validações nos campos
       nameError = Validators.validateName(nameController.text);
@@ -56,16 +55,27 @@ class _SignupScreenState extends State<SignupScreen> {
       confirmPwError,
       dateError
     ].any((error) => error != null)) {
-      return null; // Retorna null em caso de erro
+      return;
     }
 
-    return {
-      'name': nameController.text,
-      'surname': surnameController.text,
-      'email': emailController.text,
-      'password': passwordController.text,
-      'birthday': selectedDate.toString(),
-    };
+    // Se não há erros, realizar o cadastro
+    String? authError = await ApiService().signup(
+      name: nameController.text,
+      surname: surnameController.text,
+      date: selectedDate!,
+      email: emailController.text,
+      password: passwordController.text,
+    );
+
+    if (authError != null) {
+      setState(() {
+        emailError = authError; // Exibir erro no campo de e-mail
+      });
+    }
+
+    if (authError == null) {
+      Navigator.pushNamed(context, '/'); // Navegar para a página inicial
+    }
   }
 
   @override
@@ -88,6 +98,7 @@ class _SignupScreenState extends State<SignupScreen> {
               SizedBox(
                 width: 400,
                 child: TextField(
+                  textCapitalization: TextCapitalization.sentences,
                   style: const TextStyle(fontWeight: FontWeight.w600),
                   controller: nameController,
                   decoration: InputDecoration(
@@ -103,6 +114,7 @@ class _SignupScreenState extends State<SignupScreen> {
               SizedBox(
                 width: 400,
                 child: TextField(
+                  textCapitalization: TextCapitalization.sentences,
                   style: const TextStyle(fontWeight: FontWeight.w600),
                   controller: surnameController,
                   decoration: InputDecoration(
@@ -133,10 +145,8 @@ class _SignupScreenState extends State<SignupScreen> {
               SizedBox(
                 width: 400,
                 child: CustomDatePicker(
-                  // Seletor de data para data de lançamento
-                  initialDate: selectedDate,
                   errorText: dateError ?? '',
-                  buttonText: "Data de nascimento",
+                  text: "Data de nascimento",
                   onDateSelected: (date) {
                     setState(() {
                       selectedDate = date;
@@ -165,18 +175,7 @@ class _SignupScreenState extends State<SignupScreen> {
               SizedBox(
                 width: 400,
                 child: purple.PurpleButton(
-                  onPressed: () async {
-                    final user = await userData();
-                    if (user != null) {
-                      await createUser(user);
-                      Navigator.pushNamed(context, '/');
-                    } else {
-                      // Mostrar mensagem de erro ou fazer outra ação necessária
-                      if (kDebugMode) {
-                        print("Erro na validação do usuário");
-                      }
-                    }
-                  },
+                  onPressed: createUser,
                   text: 'Criar',
                   type: purple.ButtonType.fill,
                 ),

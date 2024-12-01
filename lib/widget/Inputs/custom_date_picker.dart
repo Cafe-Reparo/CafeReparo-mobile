@@ -5,7 +5,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../themes/colors.dart';
 
 class CustomDatePicker extends StatefulWidget {
-  final String buttonText;
+  final String text;
   final IconData? icon;
   final Function(DateTime?) onDateSelected;
   final String errorText;
@@ -13,7 +13,7 @@ class CustomDatePicker extends StatefulWidget {
 
   const CustomDatePicker({
     super.key,
-    this.buttonText = 'Selecionar Data',
+    this.text = 'Selecionar Data',
     this.icon = PhosphorIconsRegular.calendar,
     required this.onDateSelected,
     this.errorText = 'Date is required',
@@ -21,10 +21,10 @@ class CustomDatePicker extends StatefulWidget {
   });
 
   @override
-  _CustomDatePickerState createState() => _CustomDatePickerState();
+  CustomDatePickerState createState() => CustomDatePickerState();
 }
 
-class _CustomDatePickerState extends State<CustomDatePicker> {
+class CustomDatePickerState extends State<CustomDatePicker> {
   DateTime? selectedDate;
 
   @override
@@ -93,7 +93,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                 Text(
                   selectedDate != null
                       ? DateFormat('dd/MM/yyyy').format(selectedDate!)
-                      : widget.buttonText,
+                      : widget.text,
                   style:
                       Theme.of(context).primaryTextTheme.bodyMedium?.copyWith(
                             color: textColor,

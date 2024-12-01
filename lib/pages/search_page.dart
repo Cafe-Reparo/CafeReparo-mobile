@@ -32,24 +32,13 @@ class _SearchPageState extends State<SearchPage> {
 
   void _filterServices(String query) {
     // Realiza a busca apenas se o texto tiver pelo menos 3 caracteres
-    if (query.length >= 3) {
-      setState(() {
-        errorText = null; // Limpa a mensagem de erro
-        filteredServices = services.where((service) {
-          return service['title'].toLowerCase().contains(query.toLowerCase()) ||
-              service['description']
-                  .toLowerCase()
-                  .contains(query.toLowerCase());
-        }).toList();
-      });
-    } else {
-      setState(() {
-        errorText =
-            "Digite acima de 3 letras para pesquisar"; // Exibe a mensagem de erro
-        filteredServices =
-            []; // Limpa a lista de resultados enquanto o erro é exibido
-      });
-    }
+    setState(() {
+      errorText = null; // Limpa a mensagem de erro
+      filteredServices = services.where((service) {
+        return service['title'].toLowerCase().contains(query.toLowerCase()) ||
+            service['description'].toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    });
   }
 
   @override

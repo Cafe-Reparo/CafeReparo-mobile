@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cafe_reparo_mobile/widget/Buttons/icon_purple_button.dart'
-as iconButton;
+    as icon_button;
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -121,8 +121,8 @@ class _ContactsScreenState extends State<ContactsScreen> {
               Text(
                 'Contato e redes',
                 style: Theme.of(context).primaryTextTheme.titleMedium?.copyWith(
-                  color: MyColors.primary500,
-                ),
+                      color: MyColors.primary500,
+                    ),
               ),
               const SizedBox(
                 height: 28,
@@ -171,17 +171,17 @@ class _ContactsScreenState extends State<ContactsScreen> {
               ),
               Row(
                 children: [
-                  iconButton.IconPurpleButton(
+                  icon_button.IconPurpleButton(
                     onPressed: () =>
-                    {Navigator.pushNamed(context, '/create-service')},
-                    type: iconButton.ButtonType.outline,
+                        {Navigator.pushNamed(context, '/create-service')},
+                    type: icon_button.ButtonType.outline,
                     icon: PhosphorIconsRegular.arrowBendUpLeft,
                   ),
                   SizedBox(width: 20),
                   Expanded(
                     child: PurpleButton(
                       onPressed: () =>
-                      {Navigator.pushNamed(context, '/adress')},
+                          {Navigator.pushNamed(context, '/adress')},
                       text: "Avançar",
                     ),
                   ),

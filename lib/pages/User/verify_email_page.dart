@@ -1,4 +1,5 @@
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../themes/colors.dart';
@@ -14,7 +15,8 @@ class VerifyEmailScreen extends StatefulWidget {
 
 class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
   String? selectedItem;
-  List<TextEditingController> controllers = List.generate(5, (index) => TextEditingController());
+  List<TextEditingController> controllers =
+      List.generate(5, (index) => TextEditingController());
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
                       maxLength: 1,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         counterText: '',
                         border: InputBorder.none,
                       ),
@@ -84,8 +86,11 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 width: 400,
                 child: purple.PurpleButton(
                   onPressed: () {
-                    String code = controllers.map((controller) => controller.text).join();
-                    print('Código inserido: $code');
+                    String code =
+                        controllers.map((controller) => controller.text).join();
+                    if (kDebugMode) {
+                      print('Código inserido: $code');
+                    }
                     Navigator.pushNamed(context, '/change-password');
                   },
                   text: "Avançar",

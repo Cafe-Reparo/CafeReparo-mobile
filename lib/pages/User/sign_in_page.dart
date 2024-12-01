@@ -1,3 +1,4 @@
+import 'package:cafe_reparo_mobile/services/api_service.dart';
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -20,6 +21,26 @@ class _SigninScreenState extends State<SigninScreen> {
   final TextEditingController passwordController = TextEditingController();
   String? emailError;
   String? passwordError;
+
+  void validateSignin() async {
+    String? authError = await ApiService()
+        .signin(email: emailController.text, password: passwordController.text);
+
+    if (authError != null) {
+      setState(
+        () {
+          if (authError == 'E-mail inválido') {
+            emailError = 'E-mail inválido';
+          } else if (authError == 'Senha inválida') {
+            passwordError = 'Senha inválida';
+          }
+        },
+      );
+    }
+    if (authError == null) {
+      Navigator.pushNamed(context, '/');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +103,7 @@ class _SigninScreenState extends State<SigninScreen> {
               SizedBox(
                 width: 400,
                 child: purple.PurpleButton(
-                    onPressed: () => {},
+                    onPressed: validateSignin,
                     text: "Entrar",
                     type: purple.ButtonType.fill),
               ),

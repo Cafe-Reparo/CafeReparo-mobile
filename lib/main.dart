@@ -1,20 +1,26 @@
 import 'package:cafe_reparo_mobile/pages/Service/adress_page.dart';
 import 'package:cafe_reparo_mobile/pages/Service/contacts_page.dart';
 import 'package:cafe_reparo_mobile/pages/Service/create_service_page.dart';
+import 'package:cafe_reparo_mobile/pages/Service/read_page.dart';
 import 'package:cafe_reparo_mobile/pages/User/change_password_page.dart';
 import 'package:cafe_reparo_mobile/pages/User/edit_account_page.dart';
 import 'package:cafe_reparo_mobile/pages/User/forgot_password_page.dart';
 import 'package:cafe_reparo_mobile/pages/User/sign_in_page.dart';
 import 'package:cafe_reparo_mobile/pages/User/sign_up_page.dart';
+import 'package:cafe_reparo_mobile/pages/User/verify_email_page.dart';
 import 'package:cafe_reparo_mobile/pages/design_page.dart';
+import 'package:cafe_reparo_mobile/pages/home_page.dart';
 import 'package:cafe_reparo_mobile/pages/search_page.dart';
 import 'package:cafe_reparo_mobile/themes/custom_themes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:cafe_reparo_mobile/pages/Service/read_page.dart';
-import 'pages/User/verify_email_page.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -25,9 +31,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Café Reparo',
-      initialRoute: '/create-service',
+      initialRoute: '/',
       routes: {
-        '/': (context) => const EditAccountScreen(),
+        '/': (context) => const HomePage(title: "Café Reparo"),
         '/design': (context) => const Design(),
         '/sign-up': (context) => const SignupScreen(),
         '/sign-in': (context) => const SigninScreen(),

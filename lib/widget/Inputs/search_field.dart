@@ -39,7 +39,7 @@ class _SearchFieldState extends State<SearchField> {
         decoration: InputDecoration(
           errorText: widget.errorText,
           labelText: widget.label, // Usar o parâmetro label aqui
-          suffixIcon: Container(
+          suffixIcon: SizedBox(
             width: 50,
             height: 50,
             child: IconButton(

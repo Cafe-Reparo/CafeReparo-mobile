@@ -5,7 +5,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../themes/colors.dart';
 import '../../widget/Backgrounds/bg.dart';
-import '../../widget/Buttons/icon_purple_button.dart' as iconButton;
+import '../../widget/Buttons/icon_purple_button.dart' as icon_button;
 import '../../widget/Buttons/purple_button.dart';
 import '../../widget/header.dart';
 
@@ -127,8 +127,8 @@ class _AdressScreenState extends State<AdressScreen> {
               Text(
                 'Endereço',
                 style: Theme.of(context).primaryTextTheme.titleMedium?.copyWith(
-                  color: MyColors.primary500,
-                ),
+                      color: MyColors.primary500,
+                    ),
               ),
               const SizedBox(
                 height: 28,
@@ -158,10 +158,10 @@ class _AdressScreenState extends State<AdressScreen> {
               ),
               Row(
                 children: [
-                  iconButton.IconPurpleButton(
+                  icon_button.IconPurpleButton(
                     onPressed: () =>
-                    {Navigator.pushNamed(context, '/contacts')},
-                    type: iconButton.ButtonType.outline,
+                        {Navigator.pushNamed(context, '/contacts')},
+                    type: icon_button.ButtonType.outline,
                     icon: PhosphorIconsRegular.arrowBendUpLeft,
                   ),
                   const SizedBox(width: 20),

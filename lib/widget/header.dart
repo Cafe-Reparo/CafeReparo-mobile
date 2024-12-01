@@ -1,6 +1,8 @@
 import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:cafe_reparo_mobile/widget/Buttons/custom_circle_avatar.dart';
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -61,8 +63,26 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                   const SizedBox(width: 12),
                 ],
                 if (showAvatar)
-                  CustomCircleAvatar(
-                      onTap: () => {Navigator.pushNamed(context, '/sign-up')}),
+                  StreamBuilder(
+                    stream: FirebaseAuth.instance.authStateChanges(),
+                    builder: (context, snapshot) {
+                      return CustomCircleAvatar(
+                        onTap: () {
+                          if (snapshot.hasData) {
+                            if (kDebugMode) {
+                              print("Usuário está logado");
+                            }
+                            Navigator.pushNamed(context, '/edit-account');
+                          } else {
+                            if (kDebugMode) {
+                              print("Usuário não está logado");
+                            }
+                            Navigator.pushNamed(context, '/sign-in');
+                          }
+                        },
+                      );
+                    },
+                  ),
               ],
             )
           ],

@@ -68,9 +68,8 @@ class _DesignState extends State<Design> {
                 width: 400,
                 child: CustomDatePicker(
                   // Seletor de data para data de lançamento
-                  initialDate: selectedDate,
                   errorText: dateError ?? '',
-                  buttonText: "Select a release date",
+                  text: "Select a release date",
                   onDateSelected: (date) {
                     setState(() {
                       selectedDate = date;

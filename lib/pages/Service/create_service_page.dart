@@ -121,31 +121,40 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
               const SizedBox(
                 height: 28,
               ),
-              TextField(
-                style: TextStyle(fontWeight: FontWeight.w600),
-                decoration: InputDecoration(
-                  labelText: 'Serviço',
-                  prefixIcon: Icon(PhosphorIconsRegular.storefront),
+              SizedBox(
+                width: 400,
+                child: TextField(
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                  decoration: InputDecoration(
+                    labelText: 'Serviço',
+                    prefixIcon: Icon(PhosphorIconsRegular.storefront),
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
-              CustomAutocomplete(
-                  width: 315,
-                  hintText: 'Especialidade (opcional)',
-                  value: selectedRepair,
-                  items: const ['Pintura', 'Hidráulica', 'Elétrica'],
-                  onChanged: (value) {
-                    setState(() {
-                      selectedRepair = value;
-                    });
-                  },
-                  prefixIcon: PhosphorIconsRegular.sparkle),
+              SizedBox(
+                width: 400,
+                child: CustomAutocomplete(
+                    width: 350,
+                    hintText: 'Especialidade (opcional)',
+                    value: selectedRepair,
+                    items: const ['Pintura', 'Hidráulica', 'Elétrica'],
+                    onChanged: (value) {
+                      setState(() {
+                        selectedRepair = value;
+                      });
+                    },
+                    prefixIcon: PhosphorIconsRegular.sparkle),
+              ),
               const SizedBox(height: 10),
-              TextField(
-                style: TextStyle(fontWeight: FontWeight.w600),
-                maxLines: 4,
-                decoration: InputDecoration(
-                  labelText: 'Escreva sua descrição aqui...',
+              SizedBox(
+                width: 400,
+                child: TextField(
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                  maxLines: 4,
+                  decoration: InputDecoration(
+                    labelText: 'Escreva sua descrição aqui...',
+                  ),
                 ),
               ),
               const SizedBox(
