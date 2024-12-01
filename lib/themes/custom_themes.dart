@@ -1,5 +1,6 @@
-import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:flutter/material.dart';
+
+import 'colors.dart';
 
 class CustomThemes {
   static const textStyle = TextStyle(
@@ -25,11 +26,11 @@ class CustomThemes {
       ),
       titleLarge: TextStyle(
         fontSize: 34,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w400,
       ),
       titleMedium: TextStyle(
         fontSize: 24,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w400,
       ),
       titleSmall: TextStyle(
         fontSize: 20,
@@ -49,7 +50,11 @@ class CustomThemes {
       ),
       labelLarge: TextStyle(
         fontSize: 12,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w700,
+      ),
+      labelMedium: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
       ),
       //labelSmall usado no botão
       labelSmall: TextStyle(
@@ -68,9 +73,18 @@ class CustomThemes {
       error: MyColors.red200,
       onPrimary: MyColors.primary100,
       onSecondary: MyColors.white10,
-      onSurface: MyColors.primary550,
+      onSurface: MyColors.primary500,
       onError: MyColors.primary100,
       brightness: Brightness.dark,
+    ),
+    //
+    snackBarTheme: const SnackBarThemeData(
+      backgroundColor: MyColors.secondary200,
+      contentTextStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        color: MyColors.primary100,
+      ),
     ),
     //
     datePickerTheme: const DatePickerThemeData(
@@ -133,6 +147,11 @@ class CustomThemes {
     ),
     //
     inputDecorationTheme: InputDecorationTheme(
+      errorStyle: const TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: MyColors.red50,
+      ),
       fillColor: MyColors.primary300,
       filled: true,
       prefixIconColor: MyColors.primary400,
@@ -158,8 +177,8 @@ class CustomThemes {
     //
     chipTheme: ChipThemeData(
       backgroundColor: MyColors.primary300,
-      labelPadding: const EdgeInsets.symmetric(horizontal: 6),
-      padding: const EdgeInsets.symmetric(horizontal: 4),
+      labelPadding: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
       side: const BorderSide(
         color: Colors.transparent,
       ),

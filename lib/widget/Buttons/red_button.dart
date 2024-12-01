@@ -92,8 +92,11 @@ class RedButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
-              Icon(icon),
-              const SizedBox(width: 4),
+              Icon(
+                icon,
+                color: _getForegroundColor(),
+              ),
+              const SizedBox(width: 8),
             ],
             Text(
               text,

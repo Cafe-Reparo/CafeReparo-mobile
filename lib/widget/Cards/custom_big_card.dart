@@ -1,22 +1,22 @@
-import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../themes/colors.dart';
 
 class CustomBigCard extends StatelessWidget {
   final Widget child;
-  final double? height;
+  final double padding;
 
   const CustomBigCard({
     super.key,
     required this.child,
-    this.height,
+    this.padding = 24,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(24.0),
+      padding: EdgeInsets.all(padding),
       width: double.infinity,
-      height: height,
       decoration: BoxDecoration(
         color: MyColors.white0,
         borderRadius: const BorderRadius.only(

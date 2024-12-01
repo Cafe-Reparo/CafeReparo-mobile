@@ -1,24 +1,38 @@
-import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart'; // Importa o pacote intl
+import 'package:phosphor_flutter/phosphor_flutter.dart';
+
+import '../../themes/colors.dart';
 
 class CustomDatePicker extends StatefulWidget {
-  final String buttonText; // Propriedade para texto do botão
-  final IconData? icon; // Propriedade para ícone opcional
+  final String text;
+  final IconData? icon;
+  final Function(DateTime?) onDateSelected;
+  final String errorText;
+  final DateTime? initialDate;
 
   const CustomDatePicker({
     super.key,
-    this.buttonText = 'Selecionar Data', // Texto padrão
-    this.icon = PhosphorIcons.calendar, // Ícone opcional
+    this.text = 'Selecionar Data',
+    this.icon = PhosphorIconsRegular.calendar,
+    required this.onDateSelected,
+    this.errorText = 'Date is required',
+    this.initialDate,
   });
 
   @override
-  _CustomDatePickerState createState() => _CustomDatePickerState();
+  CustomDatePickerState createState() => CustomDatePickerState();
 }
 
-class _CustomDatePickerState extends State<CustomDatePicker> {
+class CustomDatePickerState extends State<CustomDatePicker> {
   DateTime? selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDate =
+        widget.initialDate; // Initialize selectedDate with initialDate
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -27,24 +41,40 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime(2101),
-      currentDate: selectedDate,
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
-        selectedDate = picked; // Atualiza a data selecionada
+        selectedDate = picked;
       });
+      widget.onDateSelected(selectedDate);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // Define text color based on the selection state
+    Color textColor = selectedDate != null
+        ? MyColors.primary550 // Color when date is selected
+        : MyColors.primary400; // Default color
+
+    // Define fontWeight based on whether a date is selected
+    FontWeight fontWeight = selectedDate != null
+        ? FontWeight.w600 // Bold when date is selected
+        : FontWeight.w500; // Normal when no date is selected
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         MaterialButton(
           elevation: 0,
           height: 56,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
+            side: BorderSide(
+              color: widget.errorText.isNotEmpty
+                  ? MyColors.red200
+                  : Colors.transparent,
+            ),
           ),
           color: MyColors.primary300,
           onPressed: () => _selectDate(context),
@@ -62,18 +92,33 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                 ],
                 Text(
                   selectedDate != null
-                      ? DateFormat('dd/MM/yyyy')
-                          .format(selectedDate!) // Exibe a data formatada
-                      : widget.buttonText,
+                      ? DateFormat('dd/MM/yyyy').format(selectedDate!)
+                      : widget.text,
                   style:
                       Theme.of(context).primaryTextTheme.bodyMedium?.copyWith(
-                            color: MyColors.primary400,
+                            color: textColor,
+                            fontWeight: fontWeight, // Apply dynamic fontWeight
                           ),
                 ),
               ],
             ),
           ),
         ),
+        // Error message
+        if (widget.errorText.isNotEmpty) ...[
+          const SizedBox(height: 4),
+          Row(
+            children: [
+              const SizedBox(width: 10),
+              Text(
+                widget.errorText,
+                style: Theme.of(context).primaryTextTheme.labelMedium?.copyWith(
+                      color: MyColors.red50,
+                    ),
+              ),
+            ],
+          ),
+        ],
       ],
     );
   }

@@ -1,6 +1,8 @@
 import 'package:cafe_reparo_mobile/themes/colors.dart';
 import 'package:cafe_reparo_mobile/widget/Buttons/custom_circle_avatar.dart';
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -39,10 +41,15 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Icon(
-              PhosphorIcons.coffee,
-              size: 28,
-              color: MyColors.primary550,
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/');
+              },
+              child: const Icon(
+                PhosphorIconsRegular.coffee,
+                size: 28,
+                color: MyColors.primary550,
+              ),
             ),
             Row(
               children: [
@@ -51,11 +58,31 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                     size: ButtonSize.sm,
                     onPressed: () => {},
                     text: "Reparos",
-                    icon: PhosphorIcons.storefront,
+                    icon: PhosphorIconsRegular.storefront,
                   ),
                   const SizedBox(width: 12),
                 ],
-                if (showAvatar) const CustomCircleAvatar(),
+                if (showAvatar)
+                  StreamBuilder(
+                    stream: FirebaseAuth.instance.authStateChanges(),
+                    builder: (context, snapshot) {
+                      return CustomCircleAvatar(
+                        onTap: () {
+                          if (snapshot.hasData) {
+                            if (kDebugMode) {
+                              print("Usuário está logado");
+                            }
+                            Navigator.pushNamed(context, '/edit-account');
+                          } else {
+                            if (kDebugMode) {
+                              print("Usuário não está logado");
+                            }
+                            Navigator.pushNamed(context, '/sign-in');
+                          }
+                        },
+                      );
+                    },
+                  ),
               ],
             )
           ],
