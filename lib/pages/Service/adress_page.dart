@@ -127,8 +127,8 @@ class _AdressScreenState extends State<AdressScreen> {
               Text(
                 'Endereço',
                 style: Theme.of(context).primaryTextTheme.titleMedium?.copyWith(
-                      color: MyColors.primary500,
-                    ),
+                  color: MyColors.primary500,
+                ),
               ),
               const SizedBox(
                 height: 28,
@@ -160,16 +160,17 @@ class _AdressScreenState extends State<AdressScreen> {
                 children: [
                   iconButton.IconPurpleButton(
                     onPressed: () =>
-                        {Navigator.pushNamed(context, '/contacts')},
+                    {Navigator.pushNamed(context, '/contacts')},
                     type: iconButton.ButtonType.outline,
                     icon: PhosphorIconsRegular.arrowBendUpLeft,
                   ),
-                  SizedBox(width: 20),
-                  SizedBox(
-                    width: 237,
+                  const SizedBox(width: 20),
+                  Expanded(
+                    // Faz com que o botão ocupe o espaço restante
                     child: PurpleButton(
-                      onPressed: () =>
-                          {Navigator.pushNamed(context, '/adress')},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/read'); // Ajuste aqui
+                      },
                       text: "Confirmar",
                     ),
                   ),
