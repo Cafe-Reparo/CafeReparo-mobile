@@ -18,7 +18,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Header(showRepairButton: false, showAvatar: false),
+      appBar: const Header(showRepairButton: true, showAvatar: true),
       body: Bg(
         minusSizedBoxHeight: 307,
         child: Center(
@@ -61,7 +61,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 width: 400,
                 child: purple.PurpleButton(
                     onPressed: () =>
-                        {Navigator.pushNamed(context, '/change-password')},
+                        {Navigator.pushNamed(context, '/verify')},
                     text: "Avançar",
                     type: purple.ButtonType.fill),
               ),

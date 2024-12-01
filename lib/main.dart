@@ -11,6 +11,7 @@ import 'package:cafe_reparo_mobile/pages/search_page.dart';
 import 'package:cafe_reparo_mobile/themes/custom_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'pages/User/verify_email_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         '/create-service': (context) => const CreateServiceScreen(),
         '/contacts': (context) => const ContactsScreen(),
         '/adress': (context) => const AdressScreen(),
+        '/verify': (context) => const VerifyEmailScreen(),
       },
       theme: CustomThemes().defaultTheme,
       localizationsDelegates: const [
