@@ -1,6 +1,8 @@
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../services/api_service.dart';
 import '../../themes/colors.dart';
 import '../../widget/Backgrounds/bg.dart';
 import '../../widget/Inputs/password_field.dart';
@@ -20,7 +22,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     return Scaffold(
       appBar: const Header(),
       body: Bg(
-        minusSizedBoxHeight: 334,
+        minusSizedBoxHeight: 349,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +53,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               SizedBox(
                 width: 400,
                 child: purple.PurpleButton(
-                    onPressed: () => {},
+                    onPressed: () async {
+                      try {
+                        await ApiService().signout();
+                        Navigator.pushNamed(context, '/sign-in');
+                      } catch (e) {
+                        if (kDebugMode) {
+                          print('Erro ao sair: $e');
+                        }
+                      }
+                    },
                     text: "Confirmar",
                     type: purple.ButtonType.fill),
               ),

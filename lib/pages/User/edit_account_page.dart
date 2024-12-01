@@ -154,8 +154,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
               SizedBox(
                 width: 400,
                 child: purple.PurpleButton(
-                  onPressed: () =>
-                      {Navigator.pushNamed(context, '/change-password')},
+                  onPressed: () => {Navigator.pushNamed(context, '/verify')},
                   text: "Alterar senha",
                   icon: PhosphorIconsRegular.lock,
                   type: purple.ButtonType.outline,
