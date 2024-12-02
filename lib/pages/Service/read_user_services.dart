@@ -1,23 +1,24 @@
+import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart';
 import 'package:cafe_reparo_mobile/widget/Cards/custom_card.dart';
 import 'package:cafe_reparo_mobile/widget/Inputs/search_field.dart';
 import 'package:cafe_reparo_mobile/widget/header.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-import '../data/services.dart';
-import '../themes/colors.dart';
-import '../widget/Buttons/icon_purple_button.dart';
+import '../../data/services.dart';
+import '../../themes/colors.dart';
+import '../../widget/Buttons/icon_purple_button.dart';
 
-class SearchPage extends StatefulWidget {
-  final String? query; // Permite passar a query via construtor
+class MyRepairsPage extends StatefulWidget {
+  final String? query; // Parâmetro opcional
 
-  const SearchPage({super.key, required this.query});
+  const MyRepairsPage({super.key, this.query});
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  State<MyRepairsPage> createState() => _MyRepairsPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _MyRepairsPageState extends State<MyRepairsPage> {
   late TextEditingController searchController;
   List<Map<String, dynamic>> filteredServices = [];
   String? errorText;
@@ -31,9 +32,8 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _filterServices(String query) {
-    // Realiza a busca apenas se o texto tiver pelo menos 3 caracteres
     setState(() {
-      errorText = null; // Limpa a mensagem de erro
+      errorText = null;
       filteredServices = services.where((service) {
         return service['title'].toLowerCase().contains(query.toLowerCase()) ||
             service['description'].toLowerCase().contains(query.toLowerCase());
@@ -53,7 +53,23 @@ class _SearchPageState extends State<SearchPage> {
       appBar: const Header(),
       body: Column(
         children: [
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
+          Padding(
+            padding: const EdgeInsets.only(left: 24),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Reparos criados",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: MyColors.primary400,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +96,7 @@ class _SearchPageState extends State<SearchPage> {
           ),
           const SizedBox(height: 12),
           Expanded(
-            child: filteredServices.isEmpty // Verifica se não há serviços
+            child: filteredServices.isEmpty
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,19 +107,24 @@ class _SearchPageState extends State<SearchPage> {
                         color: MyColors.primary300,
                       ),
                       Text(
-                        "Nenhum serviço encontrado",
+                        "Você não possui pontos de reparos criados ainda",
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               color: MyColors.secondary200,
                             ),
                       ),
+                      const SizedBox(height: 16),
+                      PurpleButton(
+                          onPressed: () =>
+                              {Navigator.pushNamed(context, '/create-service')},
+                          text: "Criar ponto de reparo"),
                     ],
                   )
                 : ListView.builder(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 12, vertical: 12),
-                    itemCount: filteredServices.length, // Usa a lista filtrada
+                    itemCount: filteredServices.length,
                     itemBuilder: (context, index) {
-                      final service = filteredServices[index];
+                      final repair = filteredServices[index];
                       return CustomCard(
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
@@ -111,7 +132,7 @@ class _SearchPageState extends State<SearchPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                service['title'],
+                                repair['title'],
                                 style: Theme.of(context)
                                     .primaryTextTheme
                                     .titleSmall
@@ -120,7 +141,7 @@ class _SearchPageState extends State<SearchPage> {
                                     ),
                               ),
                               Text(
-                                service['location'],
+                                repair['location'],
                                 style: Theme.of(context)
                                     .primaryTextTheme
                                     .bodySmall
@@ -130,7 +151,7 @@ class _SearchPageState extends State<SearchPage> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                service['description'],
+                                repair['description'],
                                 style: Theme.of(context)
                                     .primaryTextTheme
                                     .labelMedium
@@ -145,12 +166,12 @@ class _SearchPageState extends State<SearchPage> {
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   children: List.generate(
-                                    service['expertise'].length,
+                                    repair['expertise'].length,
                                     (chipIndex) => Padding(
                                       padding: const EdgeInsets.only(right: 8),
                                       child: Chip(
                                         label: Text(
-                                          service['expertise'][chipIndex],
+                                          repair['expertise'][chipIndex],
                                           style: Theme.of(context)
                                               .primaryTextTheme
                                               .labelLarge
@@ -171,6 +192,16 @@ class _SearchPageState extends State<SearchPage> {
                   ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/create-service');
+        },
+        backgroundColor: MyColors.primary550,
+        child: const Icon(
+          PhosphorIconsRegular.plus,
+          color: MyColors.white0,
+        ),
       ),
     );
   }

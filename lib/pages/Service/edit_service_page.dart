@@ -2,14 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+
 import '../../../themes/colors.dart';
 import '../../../widget/Backgrounds/bg.dart';
-import '../../../widget/Buttons/red_button.dart';
 import '../../../widget/Buttons/purple_button.dart';
 import '../../../widget/header.dart';
+import '../../widget/Buttons/red_button.dart';
 
-class ReadPage extends StatelessWidget {
-  const ReadPage({super.key});
+class EditServicePage extends StatelessWidget {
+  const EditServicePage({super.key});
 
   @override
   Widget build(BuildContext context) {

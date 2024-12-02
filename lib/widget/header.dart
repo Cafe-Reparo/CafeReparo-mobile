@@ -53,15 +53,34 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
             ),
             Row(
               children: [
-                if (showRepairButton) ...[
-                  PurpleButton(
-                    size: ButtonSize.sm,
-                    onPressed: () => {},
-                    text: "Reparos",
-                    icon: PhosphorIconsRegular.storefront,
+                if (showRepairButton)
+                  StreamBuilder(
+                    stream: FirebaseAuth.instance.authStateChanges(),
+                    builder: (context, snapshot) {
+                      return PurpleButton(
+                        size: ButtonSize.sm,
+                        onPressed: () {
+                          if (snapshot.hasData) {
+                            Navigator.pushNamed(
+                              context,
+                              '/my-repairs',
+                            );
+                          } else {
+                            // Usuário não está logado
+                            Navigator.pushNamed(
+                              context,
+                              '/sign-in',
+                              arguments:
+                                  "É necessário possuir uma conta para acessar essa funcionalidade",
+                            );
+                          }
+                        },
+                        text: "Reparos",
+                        icon: PhosphorIconsRegular.storefront,
+                      );
+                    },
                   ),
-                  const SizedBox(width: 12),
-                ],
+                const SizedBox(width: 12),
                 if (showAvatar)
                   StreamBuilder(
                     stream: FirebaseAuth.instance.authStateChanges(),

@@ -133,6 +133,29 @@ class ApiService {
     }
   }
 
+  Future<List<String>> readTags() async {
+    try {
+      final response = await http.get(
+        Uri.parse(getTags),
+      );
+
+      if (response.statusCode == 200) {
+        // Parse the JSON response into a List of Strings
+        final List<dynamic> tagsData = json.decode(response.body);
+        return tagsData.map((tag) => tag['name'].toString()).toList();
+      } else {
+        // Handle server error or invalid response
+        throw Exception('Erro ao buscar dados: ${response.body}');
+      }
+    } catch (e) {
+      // Handle other errors like network issues, JSON parsing, etc.
+      if (kDebugMode) {
+        print('Erro: $e');
+      }
+      throw Exception('Erro ao buscar dados das tags.');
+    }
+  }
+
   Future<Map<String, dynamic>> readOneUser() async {
     User? currentUser = FirebaseAuth.instance.currentUser;
 
@@ -157,6 +180,32 @@ class ApiService {
         print('Erro: $e');
       }
       throw Exception('Erro ao buscar dados do usuário.');
+    }
+  }
+
+  Future createRepair(Map<String, dynamic> repairData) async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    String? email = currentUser?.email!;
+    repairData['email'] = email;
+
+    final url = Uri.parse(createService);
+    final headers = {'Content-Type': 'application/json'};
+
+    try {
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: jsonEncode(repairData), // Enviando os dados no formato JSON
+      );
+
+      if (response.statusCode == 201) {
+        return jsonDecode(
+            response.body); // Sucesso: retornando a resposta do servidor
+      } else {
+        throw Exception('Failed to create repair: ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Error creating repair: $e');
     }
   }
 }

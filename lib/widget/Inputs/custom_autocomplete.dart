@@ -48,7 +48,9 @@ class CustomAutocomplete extends StatelessWidget {
             return TextFormField(
               controller: textEditingController,
               focusNode: focusNode,
-              style: Theme.of(context).primaryTextTheme.bodyMedium,
+              style: TextStyle(
+                  fontWeight:
+                      value == null ? FontWeight.normal : FontWeight.w600),
               decoration: InputDecoration(
                 filled: true,
                 hintText: hintText,
@@ -79,34 +81,44 @@ class CustomAutocomplete extends StatelessWidget {
           ) {
             return Align(
               alignment: Alignment.topLeft,
-              child: Material(
-                color: Colors.white,
-                elevation: 4.0,
-                borderRadius: BorderRadius.circular(8),
-                child: SizedBox(
-                  width: width ?? MediaQuery.of(context).size.width * 0.9,
-                  child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    shrinkWrap: true,
-                    itemCount: options.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final String option = options.elementAt(index);
-                      return ListTile(
-                        title: Text(
-                          option,
-                          style: TextStyle(
-                            fontWeight: option == value
-                                ? FontWeight.w600 // Negrito se selecionado
-                                : FontWeight
-                                    .normal, // Normal se não selecionado
-                            color: MyColors.primary400,
-                          ),
-                        ),
-                        onTap: () {
-                          onSelected(option);
+              child: Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: Material(
+                  color: MyColors.primary100,
+                  elevation: 4.0,
+                  borderRadius: BorderRadius.circular(8),
+                  child: SizedBox(
+                    width: width ?? MediaQuery.of(context).size.width * 0.9,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxHeight: 225,
+                      ),
+                      child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        shrinkWrap: true,
+                        itemCount: options.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final String option = options.elementAt(index);
+                          return ListTile(
+                            title: Text(
+                              option,
+                              style: TextStyle(
+                                fontWeight: option == value
+                                    ? FontWeight.w600 // Negrito se selecionado
+                                    : FontWeight
+                                        .normal, // Normal se não selecionado
+                                color: option == value
+                                    ? MyColors.primary500
+                                    : MyColors.primary400,
+                              ),
+                            ),
+                            onTap: () {
+                              onSelected(option);
+                            },
+                          );
                         },
-                      );
-                    },
+                      ),
+                    ),
                   ),
                 ),
               ),

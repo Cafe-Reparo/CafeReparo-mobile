@@ -4,7 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../services/api_service.dart';
 import '../../themes/colors.dart';
-import '../../utils/validators.dart';
+import '../../utils/user_validators.dart';
 import '../../widget/Backgrounds/bg.dart';
 import '../../widget/Buttons/link_button.dart';
 import '../../widget/Inputs/custom_date_picker.dart';

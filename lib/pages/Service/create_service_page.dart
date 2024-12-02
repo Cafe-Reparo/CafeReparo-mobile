@@ -1,30 +1,92 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cafe_reparo_mobile/widget/Buttons/purple_button.dart' as purple;
+import 'package:cafe_reparo_mobile/widget/Inputs/custom_multiselect.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../../models/service_data.dart';
+import '../../services/api_service.dart';
 import '../../themes/colors.dart';
+import '../../utils/service_validators.dart';
 import '../../widget/Backgrounds/bg.dart';
-import '../../widget/Inputs/custom_autocomplete.dart';
 import '../../widget/header.dart';
 
-class CreateServiceScreen extends StatefulWidget {
-  const CreateServiceScreen({super.key, String? selectedItem});
+class CreateRepairPage extends StatefulWidget {
+  const CreateRepairPage({super.key, String? selectedItem});
 
   @override
-  State<CreateServiceScreen> createState() => _CreateServiceScreenState();
+  State<CreateRepairPage> createState() => _CreateRepairPageState();
 }
 
-class _CreateServiceScreenState extends State<CreateServiceScreen> {
-  String? selectedRepair;
+class _CreateRepairPageState extends State<CreateRepairPage> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+
+  List<String> expertiseItems = [];
+  List<String> selectedExpertise = [];
+  String? nameError;
+  String? descriptionError;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchExpertiseItems();
+  }
+
+  void advance() {
+    setState(() {
+      nameError = Validators.validateNameService(nameController.text);
+      descriptionError =
+          Validators.validateDescription(descriptionController.text);
+    });
+    if ([
+      nameError,
+      descriptionError,
+    ].any((error) => error != null)) {
+      return;
+    }
+
+    final serviceData = ServiceData(
+      serviceName: nameController.text,
+      expertise: selectedExpertise,
+      description: descriptionController.text,
+    );
+    Navigator.pushNamed(
+      context,
+      '/contacts',
+      arguments: serviceData,
+    );
+  }
+
+  Future<void> fetchExpertiseItems() async {
+    try {
+      final expertiseData =
+          await ApiService().readTags(); // Call the API function to get tags
+      setState(() {
+        expertiseItems =
+            expertiseData; // Assign the fetched data to expertiseItems
+      });
+    } catch (e) {
+      setState(() {
+        if (kDebugMode) {
+          print("Error fetching expertise items: $e");
+        }
+      });
+      // Handle error: show a message, retry, etc.
+      if (kDebugMode) {
+        print("Error fetching expertise items: $e");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const Header(),
       body: Bg(
-        minusSizedBoxHeight: 521,
+        minusSizedBoxHeight: 525,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -124,8 +186,10 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
               SizedBox(
                 width: 400,
                 child: TextField(
+                  controller: nameController,
                   style: TextStyle(fontWeight: FontWeight.w600),
                   decoration: InputDecoration(
+                    errorText: nameError,
                     labelText: 'Serviço',
                     prefixIcon: Icon(PhosphorIconsRegular.storefront),
                   ),
@@ -134,26 +198,30 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
               const SizedBox(height: 10),
               SizedBox(
                 width: 400,
-                child: CustomAutocomplete(
+                child: CustomMultiSelect(
                     width: 350,
-                    hintText: 'Especialidade (opcional)',
-                    value: selectedRepair,
-                    items: const ['Pintura', 'Hidráulica', 'Elétrica'],
-                    onChanged: (value) {
+                    selectedItems: selectedExpertise,
+                    items: expertiseItems,
+                    onChanged: (selectedExpertise) {
                       setState(() {
-                        selectedRepair = value;
+                        this.selectedExpertise =
+                            selectedExpertise; // Atualiza a lista de itens selecionados
                       });
                     },
+                    hintText: 'Especialidade (opcional)',
                     prefixIcon: PhosphorIconsRegular.sparkle),
               ),
               const SizedBox(height: 10),
               SizedBox(
                 width: 400,
                 child: TextField(
+                  controller: descriptionController,
                   style: TextStyle(fontWeight: FontWeight.w600),
                   maxLines: 4,
                   decoration: InputDecoration(
+                    errorText: descriptionError,
                     labelText: 'Escreva sua descrição aqui...',
+                    alignLabelWithHint: true,
                   ),
                 ),
               ),
@@ -163,8 +231,7 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
               SizedBox(
                 width: 400,
                 child: purple.PurpleButton(
-                    onPressed: () =>
-                        {Navigator.pushNamed(context, '/contacts')},
+                    onPressed: (advance),
                     text: "Avançar",
                     type: purple.ButtonType.fill),
               ),

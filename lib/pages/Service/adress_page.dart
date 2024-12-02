@@ -1,9 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../../models/service_data.dart';
+import '../../services/api_service.dart';
 import '../../themes/colors.dart';
+import '../../utils/service_validators.dart';
 import '../../widget/Backgrounds/bg.dart';
 import '../../widget/Buttons/icon_purple_button.dart' as icon_button;
 import '../../widget/Buttons/purple_button.dart';
@@ -17,7 +22,78 @@ class AdressScreen extends StatefulWidget {
 }
 
 class _AdressScreenState extends State<AdressScreen> {
-  String? selectedItem;
+  TextEditingController cityController = TextEditingController();
+  TextEditingController streetController = TextEditingController();
+  TextEditingController numberControle = TextEditingController();
+  String? numberError;
+  String? streetError;
+  String? cityError;
+  ServiceData? serviceData;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments as ServiceData?;
+    if (args != null) {
+      setState(() {
+        serviceData = args;
+        if (kDebugMode) {
+          print(serviceData);
+        }
+      });
+    }
+  }
+
+  Future<void> sendData() async {
+    setState(() {
+      cityError = Validators.validateCity(cityController.text);
+      streetError = Validators.validateStreet(streetController.text);
+      numberError = Validators.validateNumber(numberControle.text);
+    });
+    if ([
+      cityError,
+      streetError,
+      numberError,
+    ].any((error) => error != null)) {
+      return;
+    }
+
+    // Cria um novo ServiceData com os dados atualizados
+    ServiceData updatedServiceData = ServiceData(
+      serviceName: serviceData?.serviceName,
+      expertise: serviceData?.expertise,
+      description: serviceData?.description,
+      contacts: serviceData?.contacts,
+      location: Location(
+        city: cityController.text,
+        street: streetController.text,
+        number: numberControle.text,
+      ),
+    );
+
+    final repairData = updatedServiceData.toJson();
+
+    // Passa os dados atualizados para a próxima tela
+    Navigator.pushNamed(context, '/adress', arguments: updatedServiceData);
+
+    try {
+      // Chama a função createRepair da ApiService para enviar os dados
+      final response = await ApiService().createRepair(repairData);
+
+      // Lidar com a resposta da API, como exibir uma mensagem de sucesso
+      if (kDebugMode) {
+        print("Reparo criado com sucesso: $response");
+      }
+
+      // Navega para outra tela ou exibe uma mensagem de sucesso
+      Navigator.pushNamed(context, '/success', arguments: response);
+    } catch (e) {
+      // Lidar com erro ao chamar a API
+      if (kDebugMode) {
+        print("Erro ao criar o reparo: $e");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,48 +209,64 @@ class _AdressScreenState extends State<AdressScreen> {
               const SizedBox(
                 height: 28,
               ),
-              TextField(
-                style: TextStyle(fontWeight: FontWeight.w600),
-                decoration: InputDecoration(
-                  labelText: 'Cidade',
+              SizedBox(
+                width: 400,
+                child: TextField(
+                  controller: cityController,
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                  decoration: InputDecoration(
+                    labelText: 'Cidade',
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
-              TextField(
-                style: TextStyle(fontWeight: FontWeight.w600),
-                decoration: InputDecoration(
-                  labelText: 'Rua',
+              SizedBox(
+                width: 400,
+                child: TextField(
+                  controller: streetController,
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                  decoration: InputDecoration(
+                    labelText: 'Rua',
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
-              TextField(
-                style: TextStyle(fontWeight: FontWeight.w600),
-                decoration: InputDecoration(
-                  labelText: 'Número',
+              SizedBox(
+                width: 400,
+                child: TextField(
+                  controller: numberControle,
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                  decoration: InputDecoration(
+                    labelText: 'Número',
+                  ),
+                  keyboardType: TextInputType.number, // Only numeric keyboard
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly, // Only allow digits
+                  ],
                 ),
               ),
               const SizedBox(
                 height: 28,
               ),
-              Row(
-                children: [
-                  icon_button.IconPurpleButton(
-                    onPressed: () =>
-                        {Navigator.pushNamed(context, '/contacts')},
-                    type: icon_button.ButtonType.outline,
-                    icon: PhosphorIconsRegular.arrowBendUpLeft,
-                  ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    // Faz com que o botão ocupe o espaço restante
-                    child: PurpleButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/read'); // Ajuste aqui
-                      },
-                      text: "Confirmar",
+              SizedBox(
+                width: 400,
+                child: Row(
+                  children: [
+                    icon_button.IconPurpleButton(
+                      onPressed: () =>
+                          {Navigator.pushNamed(context, '/contacts')},
+                      type: icon_button.ButtonType.outline,
+                      icon: PhosphorIconsRegular.arrowBendUpLeft,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 20),
+                    Expanded(
+                      child: PurpleButton(
+                        onPressed: (sendData),
+                        text: "Confirmar",
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -21,6 +21,7 @@ class _SigninScreenState extends State<SigninScreen> {
   final TextEditingController passwordController = TextEditingController();
   String? emailError;
   String? passwordError;
+  bool hasShownSnackbar = false;
 
   void validateSignin() async {
     String? authError = await ApiService()
@@ -44,6 +45,24 @@ class _SigninScreenState extends State<SigninScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments as String?;
+
+    if (args != null && !hasShownSnackbar) {
+      hasShownSnackbar =
+          true; // Garante que a Snackbar seja exibida uma única vez
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              args,
+              style: const TextStyle(color: MyColors.primary100),
+            ),
+            backgroundColor: MyColors.red100,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      });
+    }
     return Scaffold(
       appBar: const Header(showRepairButton: false, showAvatar: false),
       body: Bg(

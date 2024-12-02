@@ -9,7 +9,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../services/api_service.dart';
 import '../../themes/colors.dart';
-import '../../utils/validators.dart';
+import '../../utils/user_validators.dart';
 
 bool dateError = false;
 
